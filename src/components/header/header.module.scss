@@ -1,0 +1,39 @@
+header {
+  align-items: center;
+  display: flex;
+  height: var(--header-height);
+  padding: 0 desktop-vw(40px);
+  position: relative;
+  z-index: z-index("header");
+
+  @include mobile {
+    justify-content: space-between;
+    padding: 0 mobile-vw(20px);
+  }
+
+  .logoC {
+    @include dims(desktop-vw(130px), desktop-vw(110px));
+    margin-bottom: desktop-vw(-80px);
+    z-index: 100;
+
+    @include mobile {
+      @include dims(mobile-vw(150px), mobile-vw(50px));
+      transform: unset;
+    }
+  }
+
+  .navDesktop {
+    align-items: center;
+    column-gap: desktop-vw(32px);
+    display: flex;
+    justify-content: space-between;
+
+    .navItem {
+      color: var(--duqqa-brown);
+      font-family: var(--font-grandstander);
+      font-size: desktop-vw(20px);
+      font-weight: 600;
+      position: relative;
+    }
+  }
+}

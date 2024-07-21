@@ -1,0 +1,126 @@
+@import "./_reset.scss";
+@import "./_fonts.scss";
+@import "./_colors.scss";
+@import "./_easings.scss";
+@import "./_functions.scss";
+// @import './_layout.scss';
+@import "./_utils.scss";
+// @import './_themes.scss';
+@import "./_scroll.scss";
+
+:root {
+  --font-grandstander: Grandstander;
+  --header-height: #{desktop-vw(100px)};
+
+  @include mobile {
+    --header-height: #{mobile-vw(100px)};
+  }
+}
+
+html {
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  // scrollbar-width: thin;
+  @extend .noSelect;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--white);
+  line-height: 1;
+  min-height: 100vh;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a,
+button,
+input,
+label,
+textarea,
+select {
+  color: inherit;
+  cursor: pointer;
+}
+
+// *::selection {
+//   background-color: var(--caribbean-green);
+//   color: var(--kuretake-black-manga);
+// }
+
+main {
+  // overflow: hidden;
+  position: relative;
+  z-index: z-index("main");
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: default;
+}
+
+sup {
+  font-size: xx-small;
+  vertical-align: super;
+}
+
+// Be sure markers on top
+.gsap-marker-end,
+.gsap-marker-start,
+.gsap-marker-scroller-end,
+.gsap-marker-scroller-start {
+  z-index: z-index("gsap-markers") !important;
+}
+
+.input-required {
+  // box-shadow: var(--error) 0px 0px 0px 1px;
+  color: var(--error) !important;
+  transition: 400ms all ease;
+
+  * {
+    color: var(--error) !important;
+    transition: 400ms all ease;
+  }
+}
+
+.Placeholder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  aspect-ratio: 16/10;
+}
+
+.ScrollScene,
+.ViewportScrollScene {
+  outline: 1px dashed rgba(255, 255, 255, 0.33);
+  position: relative;
+}
+.ScrollScene:after,
+.ViewportScrollScene:after {
+  content: "ScrollScene";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.33);
+  color: black;
+  font-size: 10px;
+  padding: 5px;
+}
+
+.ViewportScrollScene:after {
+  content: "ViewportScrollScene";
+}

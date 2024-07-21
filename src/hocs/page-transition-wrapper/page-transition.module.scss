@@ -1,0 +1,15 @@
+.pageTransition {
+  @include position(fixed, 0, auto, auto, 0);
+  @include dims(100vw, 100vh);
+  z-index: z-index("preloader");
+  transform-origin: top center;
+  background: var(--qing-yellow);
+
+  .imgC {
+    @include dims(desktop-vw(150px));
+
+    @include mobile {
+      @include dims(mobile-vw(150px));
+    }
+  }
+}
