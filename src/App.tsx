@@ -1,4 +1,5 @@
 import Header from "@/components/header"
+import { Leva } from "leva"
 import { useOutlet } from "react-router-dom"
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
       <Header />
       {currentOutlet}
+      <Leva />
     </>
   )
 }

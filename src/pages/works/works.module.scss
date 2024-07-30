@@ -1,0 +1,39 @@
+.intro {
+  border-top: 1px solid var(--black);
+  margin: 0 desktop-vw(40px);
+  margin-top: desktop-vw(80px);
+  padding: desktop-vw(10px) 0;
+
+  > h1 {
+    font-family: var(--font-anton);
+    font-size: desktop-vw(50px);
+    font-weight: 900;
+  }
+
+  .filter {
+    .filterItem {
+      border: 1px solid var(--mercury);
+      border-radius: desktop-vw(16px);
+      font-family: var(--font-manrope);
+      font-size: desktop-vw(14px);
+      font-weight: 300;
+      padding: desktop-vw(4px) desktop-vw(12px);
+
+      > span {
+        display: block;
+        transform: translateY(desktop-vw(-1px));
+      }
+    }
+  }
+}
+
+.works {
+  margin: 0 desktop-vw(40px);
+  margin-top: desktop-vw(40px);
+
+  .cardC {
+    .worksMediaC {
+      @include dims(auto, desktop-vw(400px));
+    }
+  }
+}

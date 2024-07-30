@@ -1,0 +1,22 @@
+.customImg {
+  @include dims(100%);
+  position: relative;
+
+  > img {
+    @include dims(100%);
+    display: block;
+    left: auto;
+    max-width: 100%;
+    position: relative;
+    top: auto;
+    transition: 200ms opacity ease;
+    transform: scale(1.01);
+    opacity: 0;
+  }
+
+  &.visible {
+    img {
+      opacity: 1;
+    }
+  }
+}

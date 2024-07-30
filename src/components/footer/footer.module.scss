@@ -1,0 +1,21 @@
+.footer {
+  @include dims(auto, desktop-vw(180px));
+  padding: desktop-vw(20px) desktop-vw(40px);
+  position: relative;
+
+  .social {
+    @include position(absolute, auto, auto, desktop-vw(20px), 50%);
+    transform: translateX(-50%);
+
+    .iconC {
+      @include dims(desktop-vw(20px));
+    }
+  }
+
+  > small {
+    font-family: var(--manrope);
+    font-size: desktop-vw(20px);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+}

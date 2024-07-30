@@ -3,7 +3,7 @@ import s from "./header.module.scss"
 import cn from "clsx"
 import { Link } from "react-router-dom"
 
-import { breakpoints } from "@/utils"
+import { breakpoints } from "@/lib/utils"
 import { useMediaQuery } from "@uidotdev/usehooks"
 import { IconLogo } from "@/components/icons"
 
@@ -20,11 +20,11 @@ const Header = () => {
 
       <nav className={s.navDesktop}>
         <div className={cn(s.navItem, "cursor-pointer")}>
-          <Link to="works">Works</Link>
+          <Link to="/works">Works</Link>
         </div>
 
         <div className={cn(s.navItem, "cursor-pointer")}>
-          <Link to="let's talk">Let's Talk</Link>
+          <Link to="/let's talk">Let's Talk</Link>
         </div>
       </nav>
     </header>

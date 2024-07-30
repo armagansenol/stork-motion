@@ -1,0 +1,33 @@
+.customVideo {
+  @include dims(100%);
+  position: relative;
+
+  > video {
+    @include dims(100%);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: 100%;
+
+    border: none;
+    outline: none;
+    z-index: -1;
+  }
+
+  // .cover {
+  //   @include position(absolute, 0, 0, 0, 0);
+  //   background: red;
+  //   z-index: 10;
+  //   transition: 300ms transform ease;
+  // }
+  // @include hover {
+  //   &:hover {
+  //     .cover {
+  //       transform: scale(1.1);
+  //     }
+  //   }
+  // }
+}

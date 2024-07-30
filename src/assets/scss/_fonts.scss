@@ -1,8 +1,19 @@
-// Grandstander
+// Anton
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Black.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Black.woff") format("woff");
+  font-family: "Anton";
+  src: url("../../assets/fonts/Anton/Anton-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/Anton/Anton-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+// Manrope
+@font-face {
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-ExtraBold.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-ExtraBold.woff") format("woff");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -10,19 +21,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-ExtraBold.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+000-5FF; /* Latin glyphs */
-}
-
-@font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Bold.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Bold.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-Bold.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -30,9 +31,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-SemiBold.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-SemiBold.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-SemiBold.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -40,9 +41,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Medium.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Medium.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-Medium.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -50,9 +51,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Regular.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Regular.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -60,9 +61,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Light.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Light.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-Light.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -70,19 +71,9 @@
 }
 
 @font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-ExtraLight.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-ExtraLight.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+000-5FF; /* Latin glyphs */
-}
-
-@font-face {
-  font-family: "Grandstander";
-  src: url("../../assets/fonts/Grandstander-Thin.woff2") format("woff2"),
-    url("../../assets/fonts/Grandstander-Thin.woff") format("woff");
+  font-family: "Manrope";
+  src: url("../../assets/fonts/Manrope/Manrope-ExtraLight.woff2") format("woff2"),
+    url("../../assets/fonts/Manrope/Manrope-ExtraLight.woff") format("woff");
   font-weight: 100;
   font-style: normal;
   font-display: swap;

@@ -1,11 +1,13 @@
+import "@/assets/css/tailwind-initial.css"
+import "@/assets/scss/global.scss"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import App from "./App.tsx"
-import "@/assets/scss/global.scss"
-import "@/assets/css/tailwind-initial.css"
+import { QueryClient, QueryClientProvider } from "react-query"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { routes } from "./global/routes/index.tsx"
-import { GlobalCanvas, SmoothScrollbar } from "@14islands/r3f-scroll-rig"
+import App from "./App.tsx"
+import { routes } from "./lib/routes/index.tsx"
+import R3fScrollRigWrapper from "./hocs/r3f-scroll-rig-wrapper/index.tsx"
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -21,15 +23,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <GlobalCanvas style={{ pointerEvents: "none" }}>
-      <ambientLight />
-    </GlobalCanvas>
-    <SmoothScrollbar>
-      {(bind) => (
-        <div {...bind}>
-          <RouterProvider router={router} />
-        </div>
-      )}
-    </SmoothScrollbar>
+    <R3fScrollRigWrapper>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </R3fScrollRigWrapper>
   </React.StrictMode>
 )

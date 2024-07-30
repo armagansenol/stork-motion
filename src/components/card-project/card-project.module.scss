@@ -1,0 +1,28 @@
+.cardProject {
+  .mediaC {
+    border-radius: desktop-vw(10px);
+    margin-bottom: desktop-vw(24px);
+    overflow: hidden;
+  }
+
+  .title {
+    font-family: var(--font-manrope);
+    font-size: desktop-vw(20px);
+    font-weight: 500;
+    margin-bottom: desktop-vw(8px);
+  }
+
+  .category {
+    border: 1px solid var(--mercury);
+    border-radius: desktop-vw(16px);
+    font-family: var(--font-manrope);
+    font-size: desktop-vw(14px);
+    font-weight: 300;
+    padding: desktop-vw(4px) desktop-vw(12px);
+
+    > span {
+      display: block;
+      transform: translateY(desktop-vw(-1px));
+    }
+  }
+}

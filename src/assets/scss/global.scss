@@ -9,7 +9,8 @@
 @import "./_scroll.scss";
 
 :root {
-  --font-grandstander: Grandstander;
+  --font-anton: Anton;
+  --font-manrope: Manrope;
   --header-height: #{desktop-vw(100px)};
 
   @include mobile {
