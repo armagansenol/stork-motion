@@ -107,7 +107,7 @@ export default function DetailWork() {
         </div>
 
         <Link to="/lol" className={cx(s.marquee, "cursor-pointer")}>
-          <Marquee duration={40} repeat={4}>
+          <Marquee duration={20} repeat={4} inverted>
             <div className={cx(s.nextWork, "flex items-center")}>
               <span>NEXT WORK</span>
               <div className={s.mediaC}>

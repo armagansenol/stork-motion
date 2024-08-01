@@ -7,7 +7,7 @@ import { IconLinkedin } from "@/components/icons"
 
 export default function Footer() {
   return (
-    <footer className={cx(s.footer, "flex items-end justify-end")}>
+    <footer className={cx(s.footer, "flex flex-col tablet:flex-row items-center tablet:items-end justify-end")}>
       <div className={cx(s.social, "flex items-center justify-center gap-5")}>
         <Link to="/" className={s.iconC}>
           <IconLinkedin fill="var(--black)" />

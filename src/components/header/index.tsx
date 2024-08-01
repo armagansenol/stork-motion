@@ -24,7 +24,7 @@ const Header = () => {
         </div>
 
         <div className={cn(s.navItem, "cursor-pointer")}>
-          <Link to="/let's talk">Let's Talk</Link>
+          <Link to="/lets-talk">Let's Talk</Link>
         </div>
       </nav>
     </header>

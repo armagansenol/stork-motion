@@ -1,11 +1,18 @@
 import { Footer } from "@/components/footer"
-import { ReactNode } from "react"
+import { useScrollbar } from "@14islands/r3f-scroll-rig"
+import { ReactNode, useEffect } from "react"
 
 type Props = {
   children: ReactNode
 }
 
 const DefaultLayout = ({ children }: Props) => {
+  const scrollbar = useScrollbar()
+
+  useEffect(() => {
+    scrollbar.scrollTo(0)
+  }, [])
+
   return (
     <>
       <main>{children}</main>

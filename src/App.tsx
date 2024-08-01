@@ -9,7 +9,7 @@ function App() {
     <>
       <Header />
       {currentOutlet}
-      <Leva />
+      <Leva hidden />
     </>
   )
 }

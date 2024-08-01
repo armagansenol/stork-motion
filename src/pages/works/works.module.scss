@@ -2,7 +2,7 @@
   border-top: 1px solid var(--black);
   margin: 0 desktop-vw(40px);
   margin-top: desktop-vw(80px);
-  padding: desktop-vw(10px) 0;
+  padding: desktop-vw(16px) 0;
 
   > h1 {
     font-family: var(--font-anton);
@@ -11,6 +11,16 @@
   }
 
   .filter {
+    transition: 200ms all ease;
+
+    @include hover {
+      &:hover {
+        .filterItem {
+          opacity: 0.3;
+        }
+      }
+    }
+
     .filterItem {
       border: 1px solid var(--mercury);
       border-radius: desktop-vw(16px);
@@ -18,10 +28,22 @@
       font-size: desktop-vw(14px);
       font-weight: 300;
       padding: desktop-vw(4px) desktop-vw(12px);
+      transition: 200ms all ease;
 
       > span {
         display: block;
         transform: translateY(desktop-vw(-1px));
+      }
+
+      &.active {
+        background-color: var(--black);
+        color: var(--white);
+      }
+
+      @include hover {
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }

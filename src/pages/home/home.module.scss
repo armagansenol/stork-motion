@@ -10,6 +10,11 @@
   margin-bottom: desktop-vw(100px);
   padding: desktop-vw(50px) 0;
 
+  @include mobile {
+    margin-bottom: mobile-vw(100px);
+    padding: mobile-vw(50px) 0;
+  }
+
   > p {
     @include dims(desktop-vw(700px), auto);
     font-family: var(--font-manrope);
@@ -17,11 +22,20 @@
     font-weight: 300;
     line-height: 1.35;
     text-align: center;
+
+    @include mobile {
+      @include dims(auto);
+      font-size: mobile-vw(32px);
+    }
   }
 }
 
 .whatWeDo {
   padding: 0 desktop-vw(160px);
+
+  @include mobile {
+    padding: 0 mobile-vw(16px);
+  }
 
   .text {
     > h2 {
@@ -30,6 +44,11 @@
       font-size: desktop-vw(30px);
       font-weight: 400;
       margin-bottom: desktop-vw(32px);
+
+      @include mobile {
+        font-size: mobile-vw(30px);
+        margin-bottom: mobile-vw(32px);
+      }
     }
 
     > ul {
@@ -40,6 +59,11 @@
         font-size: desktop-vw(24px);
         font-weight: 300;
         padding: desktop-vw(8px) 0;
+
+        @include mobile {
+          font-size: mobile-vw(24px);
+          padding: mobile-vw(8px) 0;
+        }
       }
     }
   }
@@ -47,6 +71,10 @@
   .video {
     .videoC {
       @include dims(auto, desktop-vw(400px));
+
+      @include mobile {
+        @include dims(auto, mobile-vw(400px));
+      }
     }
   }
 }
@@ -54,6 +82,10 @@
 .selectedWorks {
   @include dims(auto);
   padding: desktop-vw(140px) desktop-vw(160px);
+
+  @include mobile {
+    padding: mobile-vw(140px) mobile-vw(16px);
+  }
 
   > p {
     @include dims(desktop-vw(700px), auto);
@@ -64,16 +96,33 @@
     margin: 0 auto;
     margin-top: desktop-vw(100px);
     text-align: center;
+
+    @include mobile {
+      @include dims(auto);
+      font-size: mobile-vw(32px);
+    }
   }
 
   .items {
     margin-top: desktop-vw(100px);
 
+    @include mobile {
+      margin-top: mobile-vw(100px);
+    }
+
     .cardC {
       margin-bottom: desktop-vw(100px);
 
+      @include mobile {
+        margin-bottom: mobile-vw(50px);
+      }
+
       .homeMediaC {
         @include dims(100%, desktop-vw(600px));
+
+        @include mobile {
+          @include dims(100%, mobile-vw(300px));
+        }
       }
     }
   }
@@ -83,5 +132,9 @@
     font-size: desktop-vw(100px);
     font-weight: 400;
     text-align: center;
+
+    @include mobile {
+      font-size: mobile-vw(100px);
+    }
   }
 }

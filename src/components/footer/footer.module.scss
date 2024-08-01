@@ -3,12 +3,25 @@
   padding: desktop-vw(20px) desktop-vw(40px);
   position: relative;
 
+  @include mobile {
+    @include dims(auto, mobile-vw(180px));
+    padding: mobile-vw(20px) mobile-vw(40px);
+  }
+
   .social {
     @include position(absolute, auto, auto, desktop-vw(20px), 50%);
     transform: translateX(-50%);
 
+    @include mobile {
+      @include position(relative, auto, auto, auto, auto);
+    }
+
     .iconC {
       @include dims(desktop-vw(20px));
+
+      @include mobile {
+        @include dims(mobile-vw(20px));
+      }
     }
   }
 
@@ -17,5 +30,9 @@
     font-size: desktop-vw(20px);
     font-weight: 500;
     line-height: 1.35;
+
+    @include mobile {
+      font-size: mobile-vw(20px);
+    }
   }
 }

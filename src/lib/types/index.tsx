@@ -25,7 +25,7 @@ export interface ProjectProps {
     projectName: string
     coverMedia: MediaProps
     description: string
-    categories: ServiceProps[]
+    services: string[]
   }
   content: MediaProps[]
   nextWork: {

@@ -3,13 +3,23 @@
     border-radius: desktop-vw(10px);
     margin-bottom: desktop-vw(24px);
     overflow: hidden;
+
+    @include mobile {
+      border-radius: mobile-vw(10px);
+      margin-bottom: mobile-vw(24px);
+    }
   }
 
   .title {
     font-family: var(--font-manrope);
     font-size: desktop-vw(20px);
     font-weight: 500;
-    margin-bottom: desktop-vw(8px);
+    margin-bottom: desktop-vw(12px);
+
+    @include mobile {
+      font-size: mobile-vw(20px);
+      margin-bottom: mobile-vw(12px);
+    }
   }
 
   .category {
@@ -19,6 +29,12 @@
     font-size: desktop-vw(14px);
     font-weight: 300;
     padding: desktop-vw(4px) desktop-vw(12px);
+
+    @include mobile {
+      border-radius: mobile-vw(16px);
+      font-size: mobile-vw(14px);
+      padding: mobile-vw(4px) mobile-vw(12px);
+    }
 
     > span {
       display: block;

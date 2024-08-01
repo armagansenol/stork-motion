@@ -11,7 +11,7 @@ async function single(projectName: string) {
 }
 
 export function useSingle(projectName: string) {
-  return useQuery<ProjectProps>(["single", projectName], () => single(projectName), {
+  return useQuery<ProjectProps>(["single-projects-home", projectName], () => single(projectName), {
     retry: 2,
   })
 }

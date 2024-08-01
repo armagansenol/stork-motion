@@ -2,8 +2,9 @@
 
 // Each color filled here will create a css variable exposed globally
 $colors: (
-  "black": rgb(0, 0, 0),
-  "white": rgb(255, 255, 255),
+  "white": rgb(243, 242, 238),
+  "black": rgb(21, 24, 25),
+  "error": rgb(229, 72, 77),
   "plastic-carrot": rgb(240, 93, 33),
   "mercury": rgb(235, 235, 235),
 );

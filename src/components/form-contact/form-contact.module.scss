@@ -2,8 +2,16 @@
   @include dims(auto, desktop-vw(750px));
   background-color: var(--plastic-carrot);
 
+  @include mobile {
+    @include dims(auto);
+  }
+
   .text {
-    padding: desktop-vw(60px);
+    padding: desktop-vw(90px) desktop-vw(40px);
+
+    @include mobile {
+      padding: mobile-vw(50px) mobile-vw(12px);
+    }
 
     > h5 {
       color: var(--black);
@@ -12,26 +20,52 @@
       font-size: desktop-vw(50px);
       line-height: 1.35;
       margin-bottom: desktop-vw(32px);
+
+      @include mobile {
+        font-size: mobile-vw(40px);
+        margin-bottom: mobile-vw(32px);
+        text-align: center;
+      }
     }
 
     > p {
+      @include dims(desktop-vw(360px), auto);
       color: var(--black);
       font-family: var(--font-manrope);
       font-weight: 400;
       font-size: desktop-vw(20px);
       line-height: 1.35;
+
+      @include mobile {
+        @include dims(auto);
+        font-size: mobile-vw(20px);
+        text-align: center;
+      }
+
+      > strong {
+        font-weight: 700;
+      }
     }
   }
 
   .formC {
-    padding: desktop-vw(60px);
+    padding: desktop-vw(90px) desktop-vw(40px);
     padding-right: desktop-vw(120px);
 
+    @include mobile {
+      padding: mobile-vw(50px) mobile-vw(12px);
+    }
+
     .title {
-      font-family: var(--font-anybody);
+      font-family: var(--font-manrope);
       font-size: desktop-vw(24px);
       font-weight: 500;
       margin-bottom: desktop-vw(30px);
+
+      @include mobile {
+        font-size: mobile-vw(24px);
+        margin-bottom: mobile-vw(30px);
+      }
     }
   }
 
@@ -40,57 +74,91 @@
     flex-direction: column;
     gap: desktop-vw(12px);
 
+    @include mobile {
+      gap: mobile-vw(12px);
+    }
+
     .row {
       display: flex;
       gap: desktop-vw(12px);
+
+      @include mobile {
+        gap: mobile-vw(12px);
+      }
     }
 
     .fieldC {
-      margin-bottom: desktop-vw(20px);
       flex: 1;
+      margin-bottom: desktop-vw(20px);
+
+      @include mobile {
+        margin-bottom: mobile-vw(20px);
+      }
 
       &.checkbox {
         margin-top: desktop-vw(16px);
 
-        * {
-          color: var(--error);
-
-          &::placeholder {
-            color: var(--error);
-          }
-        }
-      }
-
-      &.error {
-        .input {
-          border-bottom: 1px solid var(--error);
+        @include mobile {
+          margin-top: mobile-vw(16px);
         }
 
-        * {
-          color: var(--error);
+        // * {
+        //   color: var(--error);
 
-          &::placeholder {
-            color: var(--error);
-          }
-        }
+        //   &::placeholder {
+        //     color: var(--error);
+        //   }
+        // }
       }
 
-      &.countryCodeSelect {
-        flex: 0.35;
-        max-width: desktop-vw(180px);
-      }
+      // &.error {
+      //   .input {
+      //     border-bottom: 1px solid var(--error);
+      //   }
+
+      //   * {
+      //     color: var(--error);
+
+      //     &::placeholder {
+      //       color: var(--error);
+      //     }
+      //   }
+      // }
     }
 
     .submitBtn {
-      @include dims(desktop-vw(280px), desktop-vw(65px));
       border-radius: desktop-vw(60px);
+      cursor: pointer;
       margin-top: desktop-vw(12px);
+
+      @include mobile {
+        border-radius: mobile-vw(60px);
+        margin-top: mobile-vw(12px);
+      }
+
+      * {
+        cursor: pointer;
+      }
 
       > span {
         color: var(--black);
-        font-family: var(--font-anybody);
+        font-family: var(--font-manrope);
         font-weight: 400;
-        font-size: desktop-vw(14px);
+        font-size: desktop-vw(40px);
+
+        @include mobile {
+          font-size: mobile-vw(40px);
+        }
+      }
+
+      &:disabled,
+      &[disabled] {
+        cursor: default;
+        opacity: 0.3;
+
+        * {
+          cursor: default;
+        }
       }
     }
   }
@@ -99,14 +167,24 @@
     gap: desktop-vw(10px);
     position: relative;
 
+    @include mobile {
+      gap: mobile-vw(10px);
+    }
+
     .input {
       @include dims(100%, desktop-vw(40px));
       border: none;
       color: var(--black);
-      font-family: var(--font-anybody);
+      font-family: var(--font-manrope);
       font-weight: 400;
       font-size: desktop-vw(16px);
       padding: desktop-vw(12px) 0;
+
+      @include mobile {
+        @include dims(100%, mobile-vw(40px));
+        font-size: mobile-vw(16px);
+        padding: mobile-vw(12px) 0;
+      }
 
       &.border {
         border-bottom: 1px solid var(--black);
@@ -114,10 +192,14 @@
 
       &::placeholder {
         color: var(--black);
-        font-family: var(--font-anybody);
-        font-weight: 400;
-        font-size: desktop-vw(16px);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: desktop-vw(20px);
         transition: 400ms opacity ease;
+
+        @include mobile {
+          font-size: mobile-vw(20px);
+        }
       }
 
       &:focus {
@@ -131,13 +213,23 @@
       // }
 
       &.textarea {
+        min-height: desktop-vw(120px);
         max-height: desktop-vw(160px);
+
+        @include mobile {
+          min-height: mobile-vw(120px);
+          max-height: mobile-vw(160px);
+        }
       }
     }
 
     .box {
       border: 1px solid var(--black);
       border-radius: desktop-vw(2px);
+
+      @include mobile {
+        border-radius: mobile-vw(2px);
+      }
     }
 
     .formLabel {
@@ -146,6 +238,10 @@
       font-weight: 400;
       letter-spacing: -0.04em;
       text-align: left;
+
+      @include mobile {
+        font-size: mobile-vw(14px);
+      }
     }
 
     .formMessage {
@@ -155,6 +251,11 @@
       font-weight: 300;
       letter-spacing: -0.03em;
       text-align: left;
+
+      @include mobile {
+        @include position(absolute, calc(100% + mobile-vw(4px)), auto, auto, 0);
+        font-size: mobile-vw(11px);
+      }
     }
   }
 }

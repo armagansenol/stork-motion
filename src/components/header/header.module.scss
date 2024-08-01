@@ -17,7 +17,7 @@ header {
     z-index: 100;
 
     @include mobile {
-      @include dims(mobile-vw(150px), mobile-vw(50px));
+      @include dims(mobile-vw(50px));
       transform: unset;
     }
   }

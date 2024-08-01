@@ -5,24 +5,10 @@ import cx from "clsx"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/utility/form"
+import { FormSchema, useSubmitForm } from "@/api/mutations/contact-form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/utility/form"
 import { Input } from "@/components/utility/input"
-
-import { Checkbox } from "@/components/utility/checkbox"
-import { Link } from "react-router-dom"
-
-const FormSchema = z.object({
-  name: z.string().min(1, {
-    message: "Ad soyad bilgisi giriniz.",
-  }),
-  email: z.string().email({
-    message: "Geçerli bir e-posta adresi giriniz.",
-  }),
-  company: z.string().min(1, {
-    message: "Firma adı giriniz.",
-  }),
-  kvkk: z.boolean(),
-})
+import { Textarea } from "../utility/textarea"
 
 export default function FormContact() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -30,23 +16,38 @@ export default function FormContact() {
     defaultValues: {
       name: "",
       email: "",
-      company: "",
+      message: "",
       kvkk: false,
     },
   })
 
+  const { mutate, isLoading, isError, isSuccess } = useSubmitForm()
+
+  console.table([
+    ["isLoading", isLoading],
+    ["isError", isError],
+    ["isSuccess", isSuccess],
+  ])
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log("form submitted", data)
+    mutate(data)
   }
 
   return (
-    <div className={cx(s.formContact, "grid grid-cols-12")}>
-      <div className={cx(s.text, "col-span-5")}>
+    <div className={cx(s.formContact, "grid grid-rows-2 tablet:grid-rows-1 grid-cols-12")}>
+      <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
         <h5>LET'S CREATE SOMETHING AMAZING TOGETHER</h5>
-        <p>You can also send us an email at hello@luckluck.com if you prefer.</p>
+        <p>
+          You can also send us an email at
+          <strong>
+            <a href="mailto:hello@luckluck.com"> hello@luckluck.com </a>
+          </strong>
+          if you prefer.
+        </p>
       </div>
-      <div className={cx(s.formC, "col-span-7")}>
-        <div className="flex items-end">
+      <div className={cx(s.formC, "col-span-12 tablet:col-span-7 flex items-end")}>
+        <div className="flex-1">
           <Form {...form}>
             <form className={s.form} onSubmit={form.handleSubmit(onSubmit)}>
               <div
@@ -60,13 +61,14 @@ export default function FormContact() {
                   render={({ field }) => (
                     <FormItem className={s.formItem}>
                       <FormControl>
-                        <Input className={cx(s.input, s.border)} placeholder="Ad Soyad" {...field} />
+                        <Input className={cx(s.input, s.border)} placeholder="YOUR NAME" {...field} />
                       </FormControl>
                       <FormMessage className={s.formMessage} />
                     </FormItem>
                   )}
                 />
               </div>
+
               <div
                 className={cx(s.fieldC, {
                   [s.error]: form.formState.errors.email,
@@ -78,7 +80,7 @@ export default function FormContact() {
                   render={({ field }) => (
                     <FormItem className={s.formItem}>
                       <FormControl>
-                        <Input className={cx(s.input, s.border)} placeholder="E-posta" {...field} />
+                        <Input className={cx(s.input, s.border)} placeholder="YOUR EMAIL ADDRESS" {...field} />
                       </FormControl>
                       <FormMessage className={s.formMessage} />
                     </FormItem>
@@ -88,16 +90,20 @@ export default function FormContact() {
 
               <div
                 className={cx(s.fieldC, {
-                  [s.error]: form.formState.errors.company,
+                  [s.error]: form.formState.errors.message,
                 })}
               >
                 <FormField
                   control={form.control}
-                  name="company"
+                  name="message"
                   render={({ field }) => (
                     <FormItem className={s.formItem}>
                       <FormControl>
-                        <Input className={cx(s.input, s.border)} placeholder="Firma Adı" {...field} />
+                        <Textarea
+                          className={cx(s.input, s.textarea, s.border)}
+                          placeholder="HOW CAN WE HELP?"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage className={s.formMessage} />
                     </FormItem>
@@ -105,28 +111,9 @@ export default function FormContact() {
                 />
               </div>
 
-              {/* <div
-                className={cx(s.fieldC, {
-                  [s.error]: form.formState.errors.company,
-                })}
-              >
-                <FormField
-                  control={form.control}
-                  name="kvkk"
-                  render={({ field }) => (
-                    <FormItem className={cx(s.formItem, "flex items-center")}>
-                      <FormControl>
-                        <Checkbox className={s.box} checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                      <FormLabel className={s.formLabel}>
-                        <Link to="/">KVKK</Link> ve diğer yasal metinleri okudum, onaylıyorum.
-                      </FormLabel>
-                    </FormItem>
-                  )}
-                />
-              </div> */}
-
-              <button className={cx(s.submitBtn, "cursor-pointer")} type="submit"></button>
+              <button className={cx(s.submitBtn)} type="submit" disabled={!form.formState.isValid}>
+                <span>Send now</span>
+              </button>
             </form>
           </Form>
         </div>

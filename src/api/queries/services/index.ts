@@ -3,17 +3,13 @@ import { ServiceProps } from "@/lib/types"
 import { useQuery } from "react-query"
 
 // GET all services
-async function all(category?: string | null) {
-  const res = await apiClient.get("/services.php", {
-    params: {
-      category,
-    },
-  })
+async function all() {
+  const res = await apiClient.get("/services.php", {})
   return res.data
 }
 
-export function useAll(service?: string | null) {
-  return useQuery<ServiceProps[]>(["all", service], () => all(service), {
+export function useAll() {
+  return useQuery<ServiceProps[]>(["all-services"], () => all(), {
     retry: 2,
   })
 }

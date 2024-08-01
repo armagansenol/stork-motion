@@ -1,0 +1,9 @@
+.intro {
+  margin: desktop-vw(100px) 0;
+
+  > h1 {
+    font-family: var(--font-anton);
+    font-size: desktop-vw(220px);
+    text-align: center;
+  }
+}

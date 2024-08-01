@@ -9,7 +9,7 @@ async function all() {
 }
 
 export function useAll() {
-  return useQuery<ProjectCardProps[]>(["all"], () => all(), {
+  return useQuery<ProjectCardProps[]>(["all-projects-home"], () => all(), {
     retry: 2,
   })
 }
