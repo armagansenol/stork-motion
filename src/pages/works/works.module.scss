@@ -21,6 +21,10 @@
       }
     }
 
+    .items {
+      @include dims(desktop-vw(650px), auto);
+    }
+
     .filterItem {
       border: 1px solid var(--mercury);
       border-radius: desktop-vw(16px);

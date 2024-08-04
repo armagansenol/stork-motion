@@ -107,7 +107,7 @@ export default function Works() {
           >
             All
           </div>
-          <div className={cx("flex items-start justify-start flex-wrap gap-2")}>
+          <div className={cx(s.items, "flex items-start justify-start flex-wrap gap-2")}>
             {services &&
               services.map((item) => {
                 return (
