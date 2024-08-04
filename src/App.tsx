@@ -9,7 +9,9 @@ function App() {
     <>
       <Header />
       {currentOutlet}
-      <Leva hidden />
+      <div className="relative z-[9999999999999999]">
+        <Leva />
+      </div>
     </>
   )
 }

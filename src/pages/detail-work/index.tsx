@@ -14,7 +14,7 @@ export default function DetailWork() {
   // const navigate = useNavigate()
   const { isLoading, data } = useSingle(params.projectName ?? "")
 
-  console.log(params, data)
+  console.log(params, data, isLoading)
 
   const mockData = {
     intro: {

@@ -4,8 +4,6 @@ import { ReactNode } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { useQueryErrorResetBoundary } from "react-query"
 
-import Button from "@/components/button"
-
 type Props = {
   children: ReactNode
 }
@@ -22,7 +20,7 @@ const ErrorWrapper = (props: Props) => {
             Ooops! <span>Something went wrong.</span>
           </h1>
           <div onClick={() => resetErrorBoundary()}>
-            <Button text="Try again" theme="dark" />
+            <button>Try Again</button>
           </div>
         </div>
       )}

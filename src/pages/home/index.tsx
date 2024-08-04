@@ -1,15 +1,13 @@
 import s from "./home.module.scss"
 
 import { ScrollScene, ScrollSceneChildProps, UseCanvas } from "@14islands/r3f-scroll-rig"
-import { MeshTransmissionMaterial, PresentationControls, SpotLight, Text, useGLTF } from "@react-three/drei"
-import { Canvas, extend, ThreeElements, useFrame, useThree } from "@react-three/fiber"
+import { PresentationControls, SpotLight, Text } from "@react-three/drei"
+import { Canvas, extend, useFrame, useLoader, useThree } from "@react-three/fiber"
 import cx from "clsx"
-import { useControls } from "leva"
-import { easing } from "maath"
-import { useEffect, useRef, useState } from "react"
+import { MutableRefObject, useRef } from "react"
 import { Link } from "react-router-dom"
-import { AmbientLight } from "three"
 import * as THREE from "three"
+import { AmbientLight } from "three"
 extend({ AmbientLight, SpotLight, Canvas })
 
 import { CardProject } from "@/components/card-project"
@@ -19,6 +17,8 @@ import DefaultLayout from "@/layouts/default"
 
 import { useAll as getAllProjects } from "@/api/queries/projects-home"
 import { useAll as getAllServices } from "@/api/queries/services"
+import { LuckLuckLogoModel } from "@/components/model-logo"
+import { ModelStork } from "@/components/model-stork"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <section className={cx(s.hero)}>
+      <section className={cx(s.hero, "-mt-40")}>
         <SpinningBoxSection />
         {/* <MeshSurface /> */}
       </section>
@@ -60,7 +60,7 @@ export default function Home() {
           creativity.
         </p>
       </section>
-      <section className={cx(s.whatWeDo, "w-screen grid grid-rows-2 grid-cols-12 gap-20")}>
+      <section className={cx(s.whatWeDo, "w-screen grid grid-rows-2 tablet:grid-rows-1 grid-cols-12 gap-20")}>
         <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
           <h2>WHAT WE DO</h2>
           <ul>
@@ -111,7 +111,7 @@ function SpinningBoxSection() {
     <div className={s.test}>
       <div ref={el} className="Placeholder ScrollScene"></div>
       <UseCanvas>
-        <ScrollScene track={el} hideOffscreen={false}>
+        <ScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
           {(props) => <SpinningBoxWebGL {...props} />}
         </ScrollScene>
       </UseCanvas>
@@ -126,21 +126,33 @@ function SpinningBoxWebGL({
   scale: ScrollSceneChildProps["scale"]
   scrollState: ScrollSceneChildProps["scrollState"]
 }) {
-  const mesh = useRef<ThreeElements["mesh"]>(null)
+  const groupRef = useRef<THREE.Group>(null)
+  const tex = useLoader(THREE.TextureLoader, "/img/l1.jpg")
 
   useFrame(() => {
-    if (!mesh.current) return
-
-    mesh.current.rotation.y = scrollState.progress * Math.PI * 2
+    if (!groupRef.current) return
+    groupRef.current.rotation.y = scrollState.progress * Math.PI * 2
   })
 
   return (
-    <group scale={scale.xy.min() * 0.5}>
-      <mesh ref={mesh}>
+    <>
+      <group scale={scale.xy.min() * 0.5}>
+        <group ref={groupRef}>
+          <LuckLuckLogoModel />
+        </group>
+        {/* <mesh ref={mesh}>
         <boxGeometry />
         <meshNormalMaterial />
-      </mesh>
-    </group>
+      </mesh> */}
+      </group>
+
+      <group position={new THREE.Vector3(0, 0, -3)}>
+        <mesh
+          geometry={new THREE.PlaneGeometry(20, 10)}
+          material={new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })}
+        />
+      </group>
+    </>
   )
 }
 
@@ -150,7 +162,7 @@ function SelectedWorksSection() {
     <div className={s.mest}>
       <div ref={el} className="Placeholder ViewportScrollScene"></div>
       <UseCanvas>
-        <ScrollScene track={el} hideOffscreen={false}>
+        <ScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
           {(props) => (
             <>
               {/* <PivotControls scale={1.5} depthTest={true} lineWidth={2.5} disableSliders>
@@ -178,7 +190,7 @@ function SelectedWorksWebGL({
   scale: ScrollSceneChildProps["scale"]
   scrollState: ScrollSceneChildProps["scrollState"]
 }) {
-  const mesh = useRef<THREE.Mesh>(null)
+  const mesh = useRef<THREE.Group>(null)
 
   useFrame(() => {
     if (!mesh.current) return
@@ -186,25 +198,28 @@ function SelectedWorksWebGL({
     mesh.current.rotation.y = scrollState.progress * Math.PI * 2
   })
 
-  const materialProps = useControls({
-    thickness: { value: 0.2, min: 0, max: 3, step: 0.05 },
-    roughness: { value: 0, min: 0, max: 1, step: 0.1 },
-    transmission: { value: 1, min: 0, max: 1, step: 0.1 },
-    ior: { value: 1.2, min: 0, max: 3, step: 0.1 },
-    chromaticAberration: { value: 0.02, min: 0, max: 1 },
-    backside: { value: true },
-  })
+  // const materialProps = useControls({
+  //   thickness: { value: 0.2, min: 0, max: 3, step: 0.05 },
+  //   roughness: { value: 0, min: 0, max: 1, step: 0.1 },
+  //   transmission: { value: 1, min: 0, max: 1, step: 0.1 },
+  //   ior: { value: 1.2, min: 0, max: 3, step: 0.1 },
+  //   chromaticAberration: { value: 0.02, min: 0, max: 1 },
+  //   backside: { value: true },
+  // })
 
-  const { nodes } = useGLTF("/glb/torrus.glb") as any
+  // const { nodes } = useGLTF("/glb/torrus.glb") as any
 
   return (
     <>
       <PresentationControls rotation={[0, 0.1, 0]} snap={true}>
         <group scale={scale.xy.min() * 0.5}>
-          <group scale={1} position={[0, 0, 1]}>
+          {/* <group scale={1} position={[0, 0, 1]}>
             <mesh ref={mesh} {...nodes.Torus002}>
               <MeshTransmissionMaterial {...materialProps} />
             </mesh>
+          </group> */}
+          <group ref={mesh} scale={0.005} position={[0, -0.5, 1]}>
+            <ModelStork />
           </group>
 
           <CanvasText />
@@ -239,20 +254,20 @@ function CanvasText() {
   )
 }
 
-function Rig() {
-  const { viewport } = useThree()
-  const vw = viewport.width * 100
+// function Rig() {
+//   const { viewport } = useThree()
+//   const vw = viewport.width * 100
 
-  useFrame((state, delta) => {
-    if (vw <= 1024) return
+//   useFrame((state, delta) => {
+//     if (vw <= 1024) return
 
-    easing.damp3(
-      state.camera.position,
-      [Math.sin(-state.pointer.x), state.pointer.y, 8 + Math.cos(state.pointer.x)],
-      0.2,
-      delta
-    )
-    state.camera.lookAt(0, 0, 0)
-  })
-  return null
-}
+//     easing.damp3(
+//       state.camera.position,
+//       [Math.sin(-state.pointer.x), state.pointer.y, 8 + Math.cos(state.pointer.x)],
+//       0.2,
+//       delta
+//     )
+//     state.camera.lookAt(0, 0, 0)
+//   })
+//   return null
+// }
