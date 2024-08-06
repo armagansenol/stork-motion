@@ -81,7 +81,7 @@
 
 .selectedWorks {
   @include dims(auto);
-  padding: desktop-vw(140px) desktop-vw(160px);
+  // padding: desktop-vw(140px) desktop-vw(160px);
 
   @include mobile {
     padding: mobile-vw(140px) mobile-vw(16px);
@@ -104,7 +104,8 @@
   }
 
   .items {
-    margin-top: desktop-vw(100px);
+    margin-top: desktop-vw(80px);
+    padding: desktop-vw(80px) desktop-vw(160px);
 
     @include mobile {
       margin-top: mobile-vw(100px);
@@ -115,6 +116,10 @@
 
       @include mobile {
         margin-bottom: mobile-vw(50px);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
 
       .homeMediaC {
@@ -131,6 +136,7 @@
     font-family: var(--font-anton);
     font-size: desktop-vw(100px);
     font-weight: 400;
+    margin: desktop-vw(100px) 0;
     text-align: center;
 
     @include mobile {

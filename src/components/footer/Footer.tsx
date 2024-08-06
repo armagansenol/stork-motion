@@ -7,7 +7,9 @@ import { IconLinkedin } from "@/components/icons"
 
 export default function Footer() {
   return (
-    <footer className={cx(s.footer, "flex flex-col tablet:flex-row items-center tablet:items-end justify-end")}>
+    <footer className={cx(s.footer, "flex flex-col tablet:flex-row items-center tablet:items-end justify-between")}>
+      <small>© Luck Luck 2024</small>
+
       <div className={cx(s.social, "flex items-center justify-center gap-5")}>
         <Link to="/" className={s.iconC}>
           <IconLinkedin fill="var(--black)" />
@@ -17,7 +19,12 @@ export default function Footer() {
         </Link>
       </div>
 
-      <small>© Luck Luck 2024</small>
+      <small>
+        Web Solutions Partner{" "}
+        <a className="underline" href="https://bytemywork.com">
+          Byte My Work
+        </a>
+      </small>
     </footer>
   )
 }

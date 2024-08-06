@@ -1,13 +1,14 @@
-import Img from "@/components/custom-img"
 import s from "./detail-work.module.scss"
 
 import cx from "clsx"
 import { Link, useParams } from "react-router-dom"
-import { FormContact } from "@/components/form-contact"
-import Video from "@/components/custom-video"
-import Marquee from "@/components/marquee"
-import DefaultLayout from "@/layouts/default"
+
 import { useSingle } from "@/api/queries/projects"
+import Video from "@/components/custom-video"
+import { FormContact } from "@/components/form-contact"
+import Marquee from "@/components/marquee"
+import Img from "@/components/custom-img"
+import DefaultLayout from "@/layouts/default"
 
 export default function DetailWork() {
   const params = useParams()
@@ -17,35 +18,67 @@ export default function DetailWork() {
   console.log(params, data, isLoading)
 
   const mockData = {
-    intro: {
-      projectName: "Project Name",
-      coverMedia: {
-        type: "image",
-        src: "/img/sample.jpg",
-      },
-      description:
-        "Our project aims to create a comprehensive online platform designed to provide valuable academic resources and engaging content. This platform will feature a diverse range of webinar videos, instructional how-to videos, an extensive wiki, and a dynamic blog.",
-      categories: [
-        {
-          title: "Branding",
-          id: "1",
-        },
-      ],
+    projectName: "Project Name",
+    coverMedia: {
+      type: "image",
+      desktop: "/img/sample.jpg",
+      mobile: "/img/sample.jpg",
     },
+    description:
+      "Our project aims to create a comprehensive online platform designed to provide valuable academic resources and engaging content. This platform will feature a diverse range of webinar videos, instructional how-to videos, an extensive wiki, and a dynamic blog.",
+    services: ["Branding"],
     content: [
       {
-        type: "image",
-        src: "/img/sample.jpg",
+        id: "1",
+        items: [
+          {
+            type: "image",
+            desktop: "/img/sample.jpg",
+            mobile: "/img/sample.jpg",
+          },
+          {
+            type: "video",
+            desktop: "/video/sample.mp4",
+            mobile: "/video/sample.mp4",
+            autoplay: true,
+          },
+        ],
       },
       {
-        type: "video",
-        src: "/video/sample.mp4",
-        autoplay: true,
+        id: "2",
+        items: [
+          {
+            type: "image",
+            desktop: "/img/sample.jpg",
+            mobile: "/img/sample.jpg",
+          },
+          {
+            type: "image",
+            desktop: "/img/sample.jpg",
+            mobile: "/img/sample.jpg",
+          },
+        ],
       },
       {
-        type: "video",
-        src: "/video/sample.mp4",
-        autoplay: false,
+        id: "3",
+        items: [
+          {
+            type: "image",
+            desktop: "/img/sample.jpg",
+            mobile: "/img/sample.jpg",
+          },
+        ],
+      },
+      {
+        id: "4",
+        items: [
+          {
+            type: "video",
+            desktop: "/video/sample.mp4",
+            mobile: "/video/sample.mp4",
+            autoplay: true,
+          },
+        ],
       },
     ],
     nextWork: {
@@ -71,12 +104,12 @@ export default function DetailWork() {
       <div className={cx(s.detailWork, "flex flex-col items-stretch")}>
         <div className={cx(s.intro, "flex flex-col items-stretch")}>
           <div className={cx(s.info, "flex items-center justify-between")}>
-            <h1>{mockData.intro.projectName}</h1>
+            <h1>{mockData.projectName}</h1>
             <div className={cx("flex items-end justify-start flex-wrap gap-4")}>
-              {mockData.intro.categories.map((item) => {
+              {mockData.services.map((item, i) => {
                 return (
-                  <div className={s.filterItem} key={item.id}>
-                    <span>{item.title}</span>
+                  <div className={s.filterItem} key={i}>
+                    <span>{item}</span>
                   </div>
                 )
               })}
@@ -84,7 +117,7 @@ export default function DetailWork() {
           </div>
 
           <div className={s.mediaC}>
-            <Img src={mockData.intro.coverMedia.src} />
+            <Img src={mockData.coverMedia.desktop} />
           </div>
 
           <p className={s.description}>
@@ -95,12 +128,22 @@ export default function DetailWork() {
         </div>
 
         <div className={cx(s.content, "flex flex-col items-stretch")}>
-          {mockData.content.map((item, i) => {
+          {mockData.content.map((content, i) => {
             return (
-              <div className={s.block} key={i}>
-                <div className={s.mediaC}>
-                  {item.type === "image" ? <Img src={item.src} /> : <Video src={item.src} autoPlay={item.autoplay} />}
-                </div>
+              <div className="flex justify-stretch items-stretch gap-5" key={i}>
+                {content.items.map((item, i) => {
+                  return (
+                    <div className={cx(s.block, "flex-1")} key={i}>
+                      <div className={s.mediaC}>
+                        {item.type === "image" ? (
+                          <Img src={item.desktop} />
+                        ) : (
+                          <Video src={item.desktop} autoPlay={item.autoplay} />
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             )
           })}

@@ -54,7 +54,7 @@
       margin-bottom: desktop-vw(40px);
 
       .mediaC {
-        @include dims(auto, desktop-vw(750px));
+        @include dims(100%);
         border-radius: desktop-vw(20px);
         overflow: hidden;
       }
@@ -63,6 +63,24 @@
 
   .marquee {
     margin: desktop-vw(50px) 0;
+    padding: desktop-vw(40px) 0;
+    position: relative;
+
+    &::before {
+      content: "";
+      @include dims(calc(100% - desktop-vw(80px)), 1px);
+      @include position(absolute, 0, auto, auto, 50%);
+      background-color: var(--black);
+      transform: translateX(-50%);
+    }
+
+    &::after {
+      content: "";
+      @include dims(calc(100% - desktop-vw(80px)), 1px);
+      @include position(absolute, auto, auto, 0, 50%);
+      background-color: var(--black);
+      transform: translateX(-50%);
+    }
 
     .nextWork {
       span {

@@ -4,17 +4,12 @@
 
   > video {
     @include dims(100%);
+    border: none;
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
+    max-width: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-    max-width: 100%;
-
-    border: none;
     outline: none;
-    z-index: -1;
   }
 
   // .cover {
@@ -23,6 +18,7 @@
   //   z-index: 10;
   //   transition: 300ms transform ease;
   // }
+
   // @include hover {
   //   &:hover {
   //     .cover {

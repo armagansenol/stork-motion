@@ -1,7 +1,7 @@
 import s from "./home.module.scss"
 
-import { ScrollScene, ScrollSceneChildProps, UseCanvas } from "@14islands/r3f-scroll-rig"
-import { PresentationControls, SpotLight, Text } from "@react-three/drei"
+import { ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
+import { PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
 import { Canvas, extend, useFrame, useLoader, useThree } from "@react-three/fiber"
 import cx from "clsx"
 import { MutableRefObject, useRef } from "react"
@@ -54,12 +54,14 @@ export default function Home() {
         <SpinningBoxSection />
         {/* <MeshSurface /> */}
       </section>
+
       <section className={cx(s.info, "flex flex-col items-center")}>
         <p>
           We are Luck Luck, a design studio dedicated to crafting extraordinary experiences through innovation and
           creativity.
         </p>
       </section>
+
       <section className={cx(s.whatWeDo, "w-screen grid grid-rows-2 tablet:grid-rows-1 grid-cols-12 gap-20")}>
         <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
           <h2>WHAT WE DO</h2>
@@ -80,6 +82,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className={cx(s.selectedWorks, "flex flex-col items-stretch")}>
         <SelectedWorksSection />
         <p>Dive into our extensive portfolio of completed projects to see the magic of 3D motion design in action.</p>
@@ -98,6 +101,10 @@ export default function Home() {
         </Link>
       </section>
 
+      {/* <section className={s.viewportTest}>
+        <ViewportDemo />
+      </section> */}
+
       <section className={s.contactForm}>
         <FormContact />
       </section>
@@ -111,9 +118,9 @@ function SpinningBoxSection() {
     <div className={s.test}>
       <div ref={el} className="Placeholder ScrollScene"></div>
       <UseCanvas>
-        <ScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
+        <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
           {(props) => <SpinningBoxWebGL {...props} />}
-        </ScrollScene>
+        </ViewportScrollScene>
       </UseCanvas>
     </div>
   )
@@ -137,7 +144,7 @@ function SpinningBoxWebGL({
   return (
     <>
       <group scale={scale.xy.min() * 0.5}>
-        <group ref={groupRef}>
+        <group ref={groupRef} onPointerEnter={() => console.log("lol")}>
           <LuckLuckLogoModel />
         </group>
         {/* <mesh ref={mesh}>
@@ -148,10 +155,20 @@ function SpinningBoxWebGL({
 
       <group position={new THREE.Vector3(0, 0, -3)}>
         <mesh
-          geometry={new THREE.PlaneGeometry(20, 10)}
+          geometry={new THREE.PlaneGeometry(160, 80)}
           material={new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })}
         />
       </group>
+
+      <PerspectiveCamera
+        position={[0, 0, 120]}
+        makeDefault
+        onUpdate={(self) => {
+          self.lookAt(0, 0, 0)
+        }}
+      />
+
+      <Rig />
     </>
   )
 }
@@ -162,22 +179,9 @@ function SelectedWorksSection() {
     <div className={s.mest}>
       <div ref={el} className="Placeholder ViewportScrollScene"></div>
       <UseCanvas>
-        <ScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
-          {(props) => (
-            <>
-              {/* <PivotControls scale={1.5} depthTest={true} lineWidth={2.5} disableSliders>
-                <SelectedWorksWebGL {...props} />
-              </PivotControls>
-              <Grid position={[0, 0.0, 0]} args={[30, 30]} scale={0.5} fadeDistance={14} />
-              <Environment preset="dawn" />
-              <color args={[0x088]} attach="background" />
-              <PerspectiveCamera fov={14} position={[6, 8, 6]} makeDefault onUpdate={(self) => self.lookAt(0, 0, 0)} />
-              <CameraControls makeDefault maxZoom={1} minZoom={1} /> */}
-
-              <SelectedWorksWebGL {...props} />
-            </>
-          )}
-        </ScrollScene>
+        <ViewportScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
+          {(props) => <SelectedWorksWebGL {...props} />}
+        </ViewportScrollScene>
       </UseCanvas>
     </div>
   )
@@ -198,35 +202,27 @@ function SelectedWorksWebGL({
     mesh.current.rotation.y = scrollState.progress * Math.PI * 2
   })
 
-  // const materialProps = useControls({
-  //   thickness: { value: 0.2, min: 0, max: 3, step: 0.05 },
-  //   roughness: { value: 0, min: 0, max: 1, step: 0.1 },
-  //   transmission: { value: 1, min: 0, max: 1, step: 0.1 },
-  //   ior: { value: 1.2, min: 0, max: 3, step: 0.1 },
-  //   chromaticAberration: { value: 0.02, min: 0, max: 1 },
-  //   backside: { value: true },
-  // })
-
-  // const { nodes } = useGLTF("/glb/torrus.glb") as any
-
   return (
     <>
-      <PresentationControls rotation={[0, 0.1, 0]} snap={true}>
-        <group scale={scale.xy.min() * 0.5}>
-          {/* <group scale={1} position={[0, 0, 1]}>
-            <mesh ref={mesh} {...nodes.Torus002}>
-              <MeshTransmissionMaterial {...materialProps} />
-            </mesh>
-          </group> */}
-          <group ref={mesh} scale={0.005} position={[0, -0.5, 1]}>
-            <ModelStork />
-          </group>
+      <group scale={scale.xy.min() * 0.5}>
+        <group ref={mesh} scale={0.00007} position={[0, -0.01, 0]} onPointerEnter={() => console.log("lol")}>
+          <ModelStork />
+        </group>
 
+        <group scale={0.02} position={[0, 0, 0]}>
           <CanvasText />
         </group>
-      </PresentationControls>
+      </group>
 
-      <color attach="background" args={["#ffffff"]} />
+      <PerspectiveCamera
+        position={[0, 0, 20]}
+        makeDefault
+        onUpdate={(self) => {
+          self.lookAt(0, 0, 0)
+        }}
+      />
+
+      <Rig />
     </>
   )
 }
@@ -237,7 +233,7 @@ function CanvasText() {
 
   return (
     <Text
-      position={[0, 0, 0]}
+      position={[0, 0, -1]}
       font="/fonts/Anton/Anton-Regular.ttf"
       fontSize={vw > 1024 ? 1 : 1}
       lineHeight={1}
@@ -254,20 +250,14 @@ function CanvasText() {
   )
 }
 
-// function Rig() {
-//   const { viewport } = useThree()
-//   const vw = viewport.width * 100
+function Rig() {
+  const { camera, pointer } = useThree()
+  const vec = new THREE.Vector3()
 
-//   useFrame((state, delta) => {
-//     if (vw <= 1024) return
+  return useFrame(() => {
+    console.log(pointer.x)
 
-//     easing.damp3(
-//       state.camera.position,
-//       [Math.sin(-state.pointer.x), state.pointer.y, 8 + Math.cos(state.pointer.x)],
-//       0.2,
-//       delta
-//     )
-//     state.camera.lookAt(0, 0, 0)
-//   })
-//   return null
-// }
+    camera.position.lerp(vec.set(pointer.x * 4, pointer.y * 4, camera.position.z), 0.09)
+    camera.lookAt(0, 0, 0)
+  })
+}

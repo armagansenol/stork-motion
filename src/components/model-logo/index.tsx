@@ -53,7 +53,7 @@ export function LuckLuckLogoModel(props: JSX.IntrinsicElements["group"]) {
 
   return (
     <>
-      <group {...props} dispose={null} scale={0.02}>
+      <group {...props} dispose={null} scale={0.003}>
         <group rotation={[Math.PI / 2, 0, Math.PI / 1]}>
           <mesh castShadow receiveShadow geometry={nodes.Asset_1_1.geometry}>
             <MeshTransmissionMaterial {...materialProps} />
