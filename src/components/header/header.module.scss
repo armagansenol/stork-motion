@@ -28,12 +28,20 @@ header {
     display: flex;
     justify-content: space-between;
 
+    @include mobile {
+      column-gap: mobile-vw(32px);
+    }
+
     .navItem {
       color: var(--duqqa-brown);
       font-family: var(--font-manrope);
       font-size: desktop-vw(20px);
       font-weight: 400;
       position: relative;
+
+      @include mobile {
+        font-size: mobile-vw(16px);
+      }
     }
   }
 }

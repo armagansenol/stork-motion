@@ -62,7 +62,9 @@ export default function Home() {
         </p>
       </section>
 
-      <section className={cx(s.whatWeDo, "w-screen grid grid-rows-2 tablet:grid-rows-1 grid-cols-12 gap-20")}>
+      <section
+        className={cx(s.whatWeDo, "grid grid-rows-[auto_auto] grid-cols-12 tablet:grid-rows-1 gap-0 tablet:gap-20")}
+      >
         <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
           <h2>WHAT WE DO</h2>
           <ul>
@@ -76,7 +78,7 @@ export default function Home() {
               })}
           </ul>
         </div>
-        <div className={cx(s.video, "col-span-12 tablet:col-span-7")}>
+        <div className="col-span-12 tablet:col-span-7">
           <div className={s.videoC}>
             <Video src="/video/sample.mp4" />
           </div>
@@ -84,7 +86,10 @@ export default function Home() {
       </section>
 
       <section className={cx(s.selectedWorks, "flex flex-col items-stretch")}>
-        <SelectedWorksSection />
+        <h2 className="tablet:hidden">SELECTED WORKS</h2>
+        <div className="hidden tablet:visible">
+          <SelectedWorksSection />
+        </div>
         <p>Dive into our extensive portfolio of completed projects to see the magic of 3D motion design in action.</p>
         <div className={s.items}>
           {projects &&

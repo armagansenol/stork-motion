@@ -35,7 +35,7 @@ export default function FormContact() {
   }
 
   return (
-    <div className={cx(s.formContact, "grid grid-rows-2 tablet:grid-rows-1 grid-cols-12")}>
+    <div className={cx(s.formContact, "grid grid-rows-[auto_auto] tablet:grid-rows-1 grid-cols-12")}>
       <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
         <h5>LET'S CREATE SOMETHING AMAZING TOGETHER</h5>
         <p>

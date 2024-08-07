@@ -13,12 +13,18 @@ export interface Props extends ProjectCardProps {
 
 export default function CardProject(props: Props) {
   return (
-    <Link className={cx(s.cardProject, "flex flex-col cursor-pointer")} to={`/works/${props.url}`}>
+    <Link
+      className={cx(
+        s.cardProject,
+        "flex flex-col items-center tablet:items-start justify-center tablet:justify-start cursor-pointer"
+      )}
+      to={`/works/${props.url}`}
+    >
       <div className={cx(s.mediaC, props.mediaClassName)}>
         {props.mediaType === MediaType.image ? <Img src={props.mediaSrc} /> : <Video src={props.mediaSrc} />}
       </div>
       <p className={s.title}>{props.projectName}</p>
-      <div className={cx(s.categories, "flex items-center justify-start flex-wrap gap-2")}>
+      <div className={cx(s.categories, "flex items-center justify-center tablet:justify-start flex-wrap gap-2")}>
         {props.services &&
           props.services.map((item, i) => {
             return (

@@ -98,16 +98,26 @@ export default function Works() {
 
   return (
     <DefaultLayout>
-      <section className={cx(s.intro, "flex items-center justify-between")}>
+      <section className={cx(s.intro, "flex flex-col tablet:flex-row items-center justify-between")}>
         <h1>WORKS</h1>
-        <div className={cx(s.filter, "flex items-start justify-start flex-wrap gap-2")}>
+        <div
+          className={cx(
+            s.filter,
+            "flex items-center tablet:items-start justify-center tablet:justify-start flex-wrap gap-2"
+          )}
+        >
           <div
             className={cx(s.filterItem, "cursor-pointer", { [s.active]: currentServices.length === 0 })}
             onClick={() => handleCurrentServices("ALL")}
           >
             All
           </div>
-          <div className={cx(s.items, "flex items-start justify-start flex-wrap gap-2")}>
+          <div
+            className={cx(
+              s.items,
+              "flex items-center tablet:items-start justify-center tablet:justify-start flex-wrap gap-2"
+            )}
+          >
             {services &&
               services.map((item) => {
                 return (
@@ -123,7 +133,7 @@ export default function Works() {
           </div>
         </div>
       </section>
-      <section className={cx(s.works, "grid grid-cols-2 gap-y-20 gap-x-4")}>
+      <section className={cx(s.works, "grid grid-cols-1 tablet:grid-cols-2 gap-10 tablet:gap-y-20 tablet:gap-x-4")}>
         {projects &&
           projects.map((item, i) => {
             return (

@@ -133,6 +133,7 @@
 
       @include mobile {
         border-radius: mobile-vw(60px);
+        margin: 0 auto;
         margin-top: mobile-vw(12px);
       }
 

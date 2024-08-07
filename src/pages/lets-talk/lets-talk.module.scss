@@ -1,9 +1,17 @@
 .intro {
   margin: desktop-vw(100px) 0;
 
+  @include mobile {
+    margin: mobile-vw(30px) 0;
+  }
+
   > h1 {
     font-family: var(--font-anton);
     font-size: desktop-vw(220px);
     text-align: center;
+
+    @include mobile {
+      font-size: mobile-vw(90px);
+    }
   }
 }

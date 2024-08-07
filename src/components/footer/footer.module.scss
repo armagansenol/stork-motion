@@ -4,8 +4,8 @@
   position: relative;
 
   @include mobile {
-    @include dims(auto, mobile-vw(180px));
-    padding: mobile-vw(20px) mobile-vw(40px);
+    @include dims(auto);
+    padding: mobile-vw(40px) mobile-vw(16px);
   }
 
   .social {
@@ -14,6 +14,9 @@
 
     @include mobile {
       @include position(relative, auto, auto, auto, auto);
+      margin-bottom: mobile-vw(30px);
+      transform: translateX(0%);
+      order: 1;
     }
 
     .iconC {
@@ -32,7 +35,8 @@
     line-height: 1.35;
 
     @include mobile {
-      font-size: mobile-vw(20px);
+      font-size: mobile-vw(18px);
+      order: 2;
     }
   }
 }
