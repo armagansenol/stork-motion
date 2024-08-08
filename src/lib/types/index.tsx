@@ -5,9 +5,10 @@ export interface IOption {
 }
 
 export interface MediaProps {
-  mediaType: MediaType
-  src: string
-  cover?: string
+  desktop?: string
+  mobile?: string
+  type: MediaType
+  autoplay?: boolean
 }
 
 export enum MediaType {
@@ -21,17 +22,19 @@ export interface ServiceProps {
 }
 
 export interface ProjectProps {
-  intro: {
-    projectName: string
-    coverMedia: MediaProps
-    description: string
-    services: string[]
-  }
-  content: MediaProps[]
+  projectName: string
+  coverMedia: MediaProps
+  description: string
+  services: string[]
+  content: {
+    id: string
+    items: MediaProps[]
+  }[]
   nextWork: {
     url: string
-    media: MediaProps
+    media: string
   }
+  folderName: string
 }
 
 export interface ProjectCardProps {

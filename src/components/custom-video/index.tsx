@@ -9,17 +9,18 @@ type Props = {
   src: string
 }
 
-const Video = ({
-  autoPlay = true,
-  bgColor = "var(--white-transparent)",
-  cover = "#",
-  loop = true,
-  muted = true,
-  src = "#",
-}: Props) => {
+const Video = ({ autoPlay = true, bgColor = "var(--white-transparent)", cover = "#", src = "#" }: Props) => {
   return (
     <figure className={s.customVideo} style={{ background: bgColor }}>
-      <video poster={cover} className={s.vid} muted={muted} autoPlay={autoPlay} loop={loop} playsInline>
+      <video
+        poster={cover}
+        className={s.vid}
+        muted={autoPlay}
+        autoPlay={autoPlay}
+        loop={autoPlay}
+        playsInline
+        controls={!autoPlay}
+      >
         <source src={src} type="video/mp4" />
       </video>
     </figure>

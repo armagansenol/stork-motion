@@ -1,0 +1,19 @@
+.notFound {
+  @include dims(auto, calc(100vh - var(--header-height)));
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  > h1 {
+    font-family: var(--font-anton);
+    font-size: desktop-vw(220px);
+    margin-bottom: desktop-vw(60px);
+  }
+
+  .link {
+    font-family: var(--font-manrope);
+    font-size: desktop-vw(24px);
+    text-decoration: underline;
+  }
+}

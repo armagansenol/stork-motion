@@ -10,9 +10,10 @@ import { useState } from "react"
 import LoadingScreen from "@/components/loading-screen"
 
 export default function Works() {
-  const { data: projects, isLoading: projectsLoading } = getAllProjects()
-  const { data: services, isLoading: servicesLoading } = getAllServices()
   const [currentServices, setCurrentServices] = useState<string[]>([])
+
+  const { data: projects, isLoading: projectsLoading } = getAllProjects(currentServices.join(","))
+  const { data: services, isLoading: servicesLoading } = getAllServices()
 
   // const filters = [
   //   { ui: "Branding", type: "BRANDING" },
