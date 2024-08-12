@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { FormSchema, useSubmitForm } from "@/api/mutations/contact-form"
+import SilverStork from "@/components/silver-stork"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/utility/form"
 import { Input } from "@/components/utility/input"
-import { Textarea } from "../utility/textarea"
+import { Textarea } from "@/components/utility/textarea"
 
 export default function FormContact() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -45,6 +46,9 @@ export default function FormContact() {
           </strong>
           if you prefer.
         </p>
+        <div className={s.stork}>
+          <SilverStork />
+        </div>
       </div>
       <div className={cx(s.formC, "col-span-12 tablet:col-span-7 flex items-end")}>
         <div className="flex-1">

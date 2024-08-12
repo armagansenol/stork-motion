@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 
 import { breakpoints } from "@/lib/utils"
 import { useMediaQuery } from "@uidotdev/usehooks"
-import { IconLogo } from "@/components/icons"
 
 const Header = () => {
   const isMobile = useMediaQuery(`only screen and (max-width:${breakpoints.mobile}px)`)
@@ -15,7 +14,7 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between">
       <Link to="/" className={cn(s.logoC, "cursor-pointer")}>
-        <IconLogo />
+        {/* <IconLogo /> */}
       </Link>
 
       <nav className={s.navDesktop}>

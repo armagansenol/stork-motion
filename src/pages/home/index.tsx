@@ -1,8 +1,8 @@
 import s from "./home.module.scss"
 
 import { ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
-import { PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
-import { Canvas, extend, useFrame, useLoader, useThree } from "@react-three/fiber"
+import { Environment, PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
+import { Canvas, extend, useFrame, useThree } from "@react-three/fiber"
 import cx from "clsx"
 import { MutableRefObject, useRef } from "react"
 import { Link } from "react-router-dom"
@@ -17,7 +17,7 @@ import DefaultLayout from "@/layouts/default"
 
 import { useAll as getAllProjects } from "@/api/queries/projects-home"
 import { useAll as getAllServices } from "@/api/queries/services"
-import { LuckLuckLogoModel } from "@/components/model-logo"
+import IntroMorph from "@/components/intro-morph"
 import { ModelStork } from "@/components/model-stork"
 
 export default function Home() {
@@ -50,10 +50,11 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <section className={cx(s.hero, "-mt-40")}>
-        <SpinningBoxSection />
-        {/* <MeshSurface /> */}
-      </section>
+      <div>
+        <section className={cx(s.hero, "pin-wrapper")}>
+          <SpinningBoxSection />
+        </section>
+      </div>
 
       <section className={cx(s.info, "flex flex-col items-center")}>
         <p>
@@ -87,7 +88,7 @@ export default function Home() {
 
       <section className={cx(s.selectedWorks, "flex flex-col items-stretch")}>
         <h2 className="tablet:hidden">SELECTED WORKS</h2>
-        <div className="hidden tablet:visible">
+        <div className={cx(s.selectedWorksTitleC, "hidden tablet:block")}>
           <SelectedWorksSection />
         </div>
         <p>Dive into our extensive portfolio of completed projects to see the magic of 3D motion design in action.</p>
@@ -106,10 +107,6 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* <section className={s.viewportTest}>
-        <ViewportDemo />
-      </section> */}
-
       <section className={s.contactForm}>
         <FormContact />
       </section>
@@ -120,60 +117,13 @@ export default function Home() {
 function SpinningBoxSection() {
   const el = useRef<HTMLDivElement>(null)
   return (
-    <div className={s.test}>
+    <>
       <div ref={el} className="Placeholder ScrollScene"></div>
       <UseCanvas>
         <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
-          {(props) => <SpinningBoxWebGL {...props} />}
+          {(props) => <IntroMorph {...props} />}
         </ViewportScrollScene>
       </UseCanvas>
-    </div>
-  )
-}
-
-function SpinningBoxWebGL({
-  scale,
-  scrollState,
-}: {
-  scale: ScrollSceneChildProps["scale"]
-  scrollState: ScrollSceneChildProps["scrollState"]
-}) {
-  const groupRef = useRef<THREE.Group>(null)
-  const tex = useLoader(THREE.TextureLoader, "/img/l1.jpg")
-
-  useFrame(() => {
-    if (!groupRef.current) return
-    groupRef.current.rotation.y = scrollState.progress * Math.PI * 2
-  })
-
-  return (
-    <>
-      <group scale={scale.xy.min() * 0.5}>
-        <group ref={groupRef} onPointerEnter={() => console.log("lol")}>
-          <LuckLuckLogoModel />
-        </group>
-        {/* <mesh ref={mesh}>
-        <boxGeometry />
-        <meshNormalMaterial />
-      </mesh> */}
-      </group>
-
-      <group position={new THREE.Vector3(0, 0, -3)}>
-        <mesh
-          geometry={new THREE.PlaneGeometry(160, 80)}
-          material={new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })}
-        />
-      </group>
-
-      <PerspectiveCamera
-        position={[0, 0, 120]}
-        makeDefault
-        onUpdate={(self) => {
-          self.lookAt(0, 0, 0)
-        }}
-      />
-
-      <Rig />
     </>
   )
 }
@@ -181,14 +131,14 @@ function SpinningBoxWebGL({
 function SelectedWorksSection() {
   const el = useRef<HTMLDivElement>(null)
   return (
-    <div className={s.mest}>
+    <>
       <div ref={el} className="Placeholder ViewportScrollScene"></div>
       <UseCanvas>
         <ViewportScrollScene track={el as MutableRefObject<HTMLElement>} hideOffscreen={false}>
           {(props) => <SelectedWorksWebGL {...props} />}
         </ViewportScrollScene>
       </UseCanvas>
-    </div>
+    </>
   )
 }
 
@@ -210,8 +160,34 @@ function SelectedWorksWebGL({
   return (
     <>
       <group scale={scale.xy.min() * 0.5}>
-        <group ref={mesh} scale={0.00007} position={[0, -0.01, 0]} onPointerEnter={() => console.log("lol")}>
-          <ModelStork />
+        <group ref={mesh} scale={0.00007} position={[0, 0, 0]} onPointerEnter={() => console.log("lol")}>
+          <ModelStork
+            material={
+              // new THREE.MeshPhysicalMaterial({
+              //   transparent: true,
+              //   opacity: 0.25,
+              //   transmission: 1,
+              //   roughness: 0.05,
+              //   metalness: 0,
+              //   reflectivity: 1,
+              //   ior: 1.45,
+              //   clearcoat: 0.8,
+              //   clearcoatRoughness: 0,
+              //   color: 0xffffff,
+              //   thickness: 0.5,
+              //   envMapIntensity: 2,
+              // })
+              new THREE.MeshPhysicalMaterial({
+                metalness: 1,
+                roughness: 0.2,
+                reflectivity: 1,
+                clearcoat: 0.5,
+                clearcoatRoughness: 0.1,
+                envMapIntensity: 1.5,
+                color: "#F05D21",
+              })
+            }
+          />
         </group>
 
         <group scale={0.02} position={[0, 0, 0]}>
@@ -226,6 +202,10 @@ function SelectedWorksWebGL({
           self.lookAt(0, 0, 0)
         }}
       />
+
+      <ambientLight intensity={1} />
+
+      <Environment preset="studio" />
 
       <Rig />
     </>
@@ -262,7 +242,7 @@ function Rig() {
   return useFrame(() => {
     console.log(pointer.x)
 
-    camera.position.lerp(vec.set(pointer.x * 4, pointer.y * 4, camera.position.z), 0.09)
+    camera.position.lerp(vec.set(pointer.x * -2, pointer.y * -2, camera.position.z), 0.09)
     camera.lookAt(0, 0, 0)
   })
 }

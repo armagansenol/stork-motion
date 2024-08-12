@@ -26,7 +26,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["node"]
+    "types": ["node", "vite-plugin-glsl/ext"]
   },
   "include": ["src"]
 }

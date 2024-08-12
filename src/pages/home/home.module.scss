@@ -1,5 +1,7 @@
 .hero {
-  // @include dims(auto, calc(100vh - var(--header-height)));
+  @include dims(auto, calc(100vh - var(--header-height)));
+  margin-top: calc(-1 * var(--header-height));
+  overflow: hidden;
 
   .test {
     margin-top: calc(var(--header-height) * -1);
@@ -92,6 +94,10 @@
     padding: mobile-vw(50px) mobile-vw(16px);
   }
 
+  .selectedWorksTitleC {
+    @include dims(100%, desktop-vw(900px));
+  }
+
   > h2 {
     font-size: mobile-vw(32px);
     color: var(--plastic-carrot);
@@ -110,7 +116,6 @@
     font-weight: 300;
     line-height: 1.35;
     margin: 0 auto;
-    margin-top: desktop-vw(100px);
     text-align: center;
 
     @include mobile {

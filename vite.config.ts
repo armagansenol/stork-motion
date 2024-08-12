@@ -4,6 +4,7 @@ import path from "path"
 import sass from "sass"
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer"
 import tsconfigPaths from "vite-tsconfig-paths"
+import glsl from "vite-plugin-glsl"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -31,5 +32,6 @@ export default defineConfig({
       exclude: /\.(gif)$/i, // add this line to exclude .gif files
     }),
     tsconfigPaths(),
+    glsl(),
   ],
 })
