@@ -1,28 +1,27 @@
 import s from "./header.module.scss"
 
-import cn from "clsx"
+import cx from "clsx"
 import { Link } from "react-router-dom"
 
-import { breakpoints } from "@/lib/utils"
-import { useMediaQuery } from "@uidotdev/usehooks"
+import { IconLogo } from "@/components/icons"
 
-const Header = () => {
-  const isMobile = useMediaQuery(`only screen and (max-width:${breakpoints.mobile}px)`)
+interface Props {
+  className?: string
+}
 
-  console.log(isMobile)
-
+const Header = (props: Props) => {
   return (
-    <header className="flex items-center justify-between">
-      <Link to="/" className={cn(s.logoC, "cursor-pointer")}>
-        {/* <IconLogo /> */}
+    <header className={cx(props.className, "flex items-center justify-between")}>
+      <Link to="/" className={cx(s.logoC, "cursor-pointer")}>
+        <IconLogo />
       </Link>
 
       <nav className={s.navDesktop}>
-        <div className={cn(s.navItem, "cursor-pointer")}>
+        <div className={cx(s.navItem, "cursor-pointer")}>
           <Link to="/works">Works</Link>
         </div>
 
-        <div className={cn(s.navItem, "cursor-pointer")}>
+        <div className={cx(s.navItem, "cursor-pointer")}>
           <Link to="/lets-talk">Let's Talk</Link>
         </div>
       </nav>

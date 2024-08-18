@@ -8,7 +8,7 @@ header {
 
   @include mobile {
     justify-content: space-between;
-    padding: 0 mobile-vw(20px);
+    padding: 0 mobile-vw(16px);
   }
 
   .logoC {
@@ -17,7 +17,8 @@ header {
     z-index: 100;
 
     @include mobile {
-      @include dims(mobile-vw(50px));
+      @include dims(mobile-vw(90px), auto);
+      margin-bottom: unset;
       transform: unset;
     }
   }

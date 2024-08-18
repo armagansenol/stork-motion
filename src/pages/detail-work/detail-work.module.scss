@@ -1,18 +1,37 @@
 .detailWork {
   padding-top: desktop-vw(100px);
 
+  @include mobile {
+    padding-top: unset;
+  }
+
   .intro {
     margin-bottom: desktop-vw(100px);
     padding: 0 desktop-vw(40px);
+
+    @include mobile {
+      margin-bottom: mobile-vw(30px);
+      padding: 0 mobile-vw(16px);
+    }
 
     .info {
       border-top: 1px solid var(--black);
       padding: desktop-vw(30px) 0 desktop-vw(60px) 0;
 
+      @include mobile {
+        padding: mobile-vw(20px) 0 mobile-vw(30px) 0;
+      }
+
       > h1 {
         font-family: var(--font-manrope);
         font-size: desktop-vw(32px);
         font-weight: 500;
+
+        @include mobile {
+          font-size: mobile-vw(32px);
+          margin-bottom: mobile-vw(30px);
+          text-align: center;
+        }
       }
 
       .filterItem {
@@ -23,9 +42,19 @@
         font-weight: 300;
         padding: desktop-vw(4px) desktop-vw(12px);
 
+        @include mobile {
+          border-radius: mobile-vw(16px);
+          font-size: mobile-vw(12px);
+          padding: mobile-vw(4px) mobile-vw(12px);
+        }
+
         > span {
           display: block;
           transform: translateY(desktop-vw(-1px));
+
+          @include mobile {
+            transform: translateY(mobile-vw(-1px));
+          }
         }
       }
     }
@@ -34,6 +63,11 @@
       @include dims(auto, desktop-vw(750px));
       border-radius: desktop-vw(20px);
       overflow: hidden;
+
+      @include mobile {
+        @include dims(auto, mobile-vw(250px));
+        border-radius: mobile-vw(10px);
+      }
     }
 
     .description {
@@ -44,19 +78,38 @@
       line-height: 1.35;
       margin: desktop-vw(50px) 0;
       margin-left: auto;
+
+      @include mobile {
+        @include dims(auto);
+        font-size: mobile-vw(20px);
+        margin: mobile-vw(20px) 0;
+        text-align: center;
+      }
     }
   }
 
   .content {
     padding: 0 desktop-vw(40px);
 
+    @include mobile {
+      padding: 0 mobile-vw(16px);
+    }
+
     .block {
-      margin-bottom: desktop-vw(40px);
+      margin-bottom: desktop-vw(20px);
+
+      @include mobile {
+        margin-bottom: mobile-vw(12px);
+      }
 
       .mediaC {
         @include dims(100%);
         border-radius: desktop-vw(20px);
         overflow: hidden;
+
+        @include mobile {
+          border-radius: mobile-vw(10px);
+        }
       }
     }
   }
@@ -66,12 +119,21 @@
     padding: desktop-vw(40px) 0;
     position: relative;
 
+    @include mobile {
+      margin: mobile-vw(30px) 0;
+      padding: mobile-vw(20px) 0;
+    }
+
     &::before {
       content: "";
       @include dims(calc(100% - desktop-vw(80px)), 1px);
       @include position(absolute, 0, auto, auto, 50%);
       background-color: var(--black);
       transform: translateX(-50%);
+
+      @include mobile {
+        @include dims(calc(100% - mobile-vw(16px)), 1px);
+      }
     }
 
     &::after {
@@ -80,6 +142,10 @@
       @include position(absolute, auto, auto, 0, 50%);
       background-color: var(--black);
       transform: translateX(-50%);
+
+      @include mobile {
+        @include dims(calc(100% - mobile-vw(16px)), 1px);
+      }
     }
 
     .nextWork {
@@ -87,13 +153,23 @@
         font-family: var(--font-anton);
         font-size: desktop-vw(160px);
         font-weight: 400;
+
+        @include mobile {
+          font-size: mobile-vw(80px);
+        }
       }
 
       .mediaC {
         @include dims(desktop-vw(270px), desktop-vw(160px));
-        border-radius: desktop-vw(300px);
+        border-radius: desktop-vw(64px);
         margin: 0 desktop-vw(50px);
         overflow: hidden;
+
+        @include mobile {
+          @include dims(mobile-vw(135px), mobile-vw(80px));
+          border-radius: mobile-vw(64px);
+          margin: 0 mobile-vw(20px);
+        }
       }
     }
   }

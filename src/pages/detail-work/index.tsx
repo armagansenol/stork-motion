@@ -10,6 +10,7 @@ import Marquee from "@/components/marquee"
 import Img from "@/components/custom-img"
 import DefaultLayout from "@/layouts/default"
 import { useEffect } from "react"
+import Header from "@/components/header"
 
 export default function DetailWork() {
   const params = useParams()
@@ -104,11 +105,13 @@ export default function DetailWork() {
 
   return (
     <DefaultLayout>
+      <Header />
+
       <div className={cx(s.detailWork, "flex flex-col items-stretch")}>
         <div className={cx(s.intro, "flex flex-col items-stretch")}>
-          <div className={cx(s.info, "flex items-center justify-between")}>
+          <div className={cx(s.info, "flex flex-col tablet:flex-row items-center justify-between")}>
             <h1>{data && data.projectName}</h1>
-            <div className={cx("flex items-end justify-start flex-wrap gap-4")}>
+            <div className={cx("flex items-end justify-start flex-wrap gap-2 tablet:gap-4")}>
               {data &&
                 data.services.map((item, i) => {
                   return (
@@ -131,7 +134,7 @@ export default function DetailWork() {
           {data &&
             data.content.map((content) => {
               return (
-                <div className="flex justify-stretch items-stretch gap-5" key={content.id}>
+                <div className="flex justify-stretch items-stretch gap-3 tablet:gap-5" key={content.id}>
                   {content.items.map((item, i) => {
                     return (
                       <div className={cx(s.block, "flex-1")} key={i}>

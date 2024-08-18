@@ -17,15 +17,14 @@ import DefaultLayout from "@/layouts/default"
 
 import { useAll as getAllProjects } from "@/api/queries/projects-home"
 import { useAll as getAllServices } from "@/api/queries/services"
+import Header from "@/components/header"
 import IntroMorph from "@/components/intro-morph"
 import { ModelStork } from "@/components/model-stork"
+import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
   const { data: services } = getAllServices()
-
-  console.log("projects", services)
-  console.log("services", services)
 
   // const selectedWorks = [
   //   {
@@ -50,15 +49,16 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <div>
-        <section className={cx(s.hero, "pin-wrapper")}>
-          <SpinningBoxSection />
-        </section>
-      </div>
+      <Header className="tablet:hidden" />
+
+      <section className={cx(s.hero, "pin-wrapper")}>
+        <Header />
+        <SpinningBoxSection />
+      </section>
 
       <section className={cx(s.info, "flex flex-col items-center")}>
         <p>
-          We are Luck Luck, a design studio dedicated to crafting extraordinary experiences through innovation and
+          We are Stork Motion, a design studio dedicated to crafting extraordinary experiences through innovation and
           creativity.
         </p>
       </section>
@@ -117,14 +117,14 @@ export default function Home() {
 function SpinningBoxSection() {
   const el = useRef<HTMLDivElement>(null)
   return (
-    <>
-      <div ref={el} className="Placeholder ScrollScene"></div>
+    <div className="StickyContainer">
+      <div ref={el} className="SomeDomContent Debug"></div>
       <UseCanvas>
-        <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
+        <StickyScrollScene track={el as MutableRefObject<HTMLElement>}>
           {(props) => <IntroMorph {...props} />}
-        </ViewportScrollScene>
+        </StickyScrollScene>
       </UseCanvas>
-    </>
+    </div>
   )
 }
 
@@ -240,8 +240,6 @@ function Rig() {
   const vec = new THREE.Vector3()
 
   return useFrame(() => {
-    console.log(pointer.x)
-
     camera.position.lerp(vec.set(pointer.x * -2, pointer.y * -2, camera.position.z), 0.09)
     camera.lookAt(0, 0, 0)
   })

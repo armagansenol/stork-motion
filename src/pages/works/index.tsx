@@ -8,6 +8,7 @@ import { useAll as getAllServices } from "@/api/queries/services"
 import { useAll as getAllProjects } from "@/api/queries/project-card"
 import { useState } from "react"
 import LoadingScreen from "@/components/loading-screen"
+import Header from "@/components/header"
 
 export default function Works() {
   const [currentServices, setCurrentServices] = useState<string[]>([])
@@ -99,6 +100,8 @@ export default function Works() {
 
   return (
     <DefaultLayout>
+      <Header />
+
       <section className={cx(s.intro, "flex flex-col tablet:flex-row items-center justify-between")}>
         <h1>WORKS</h1>
         <div

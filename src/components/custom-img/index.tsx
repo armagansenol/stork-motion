@@ -1,5 +1,6 @@
-import { SyntheticEvent, useState } from "react"
 import s from "./custom-img.module.scss"
+
+import { SyntheticEvent, useState } from "react"
 
 import cn from "clsx"
 

@@ -10,12 +10,12 @@ const DefaultLayout = ({ children }: Props) => {
   const scrollbar = useScrollbar()
 
   useEffect(() => {
-    scrollbar.scrollTo(0)
-  }, [])
+    scrollbar.__lenis?.scrollTo(0, { immediate: true })
+  }, [scrollbar])
 
   return (
     <>
-      <main>{children}</main>
+      {children}
       <Footer />
     </>
   )

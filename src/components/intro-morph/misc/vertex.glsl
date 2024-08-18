@@ -22,5 +22,5 @@ void main() {
   vec3 black = vec3(0.0, 0.0, 0.0);
 
   // Mix orange and black based on distance
-  vColor = mix(black, orange, distance);
+  vColor = black;
 }

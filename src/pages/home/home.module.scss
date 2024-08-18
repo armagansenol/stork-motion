@@ -1,10 +1,10 @@
 .hero {
-  @include dims(auto, calc(100vh - var(--header-height)));
-  margin-top: calc(-1 * var(--header-height));
+  // @include dims(auto, calc(100vh - var(--header-height)));
+  @include dims(100vw, 100vh);
   overflow: hidden;
 
-  .test {
-    margin-top: calc(var(--header-height) * -1);
+  @include mobile {
+    display: none;
   }
 }
 
@@ -13,8 +13,8 @@
   padding: desktop-vw(50px) 0;
 
   @include mobile {
-    margin-bottom: mobile-vw(50px);
-    padding: mobile-vw(50px) 0;
+    margin-bottom: unset;
+    padding: mobile-vw(30px) mobile-vw(16px) mobile-vw(50px) mobile-vw(16px);
   }
 
   > p {
@@ -53,7 +53,7 @@
       margin-bottom: desktop-vw(32px);
 
       @include mobile {
-        font-size: mobile-vw(64px);
+        font-size: mobile-vw(72px);
         margin-bottom: mobile-vw(32px);
         text-align: center;
       }
@@ -69,9 +69,9 @@
         padding: desktop-vw(8px) 0;
 
         @include mobile {
-          font-size: mobile-vw(24px);
+          font-size: mobile-vw(20px);
           line-height: 1.25;
-          padding: mobile-vw(16px) 0;
+          padding: mobile-vw(10px) 0;
         }
       }
     }

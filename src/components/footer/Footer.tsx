@@ -13,7 +13,7 @@ export default function Footer() {
         "flex flex-col tablet:flex-row items-center tablet:items-end justify-between gap-5 tablet:gap-0"
       )}
     >
-      <small>© Luck Luck 2024</small>
+      <small>© Stork Motion 2024</small>
 
       <div className={cx(s.social, "flex items-center justify-center gap-5")}>
         <Link to="/" className={s.iconC}>

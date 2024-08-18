@@ -14,7 +14,7 @@
   --header-height: #{desktop-vw(100px)};
 
   @include mobile {
-    --header-height: #{mobile-vw(100px)};
+    --header-height: #{mobile-vw(90px)};
   }
 }
 
@@ -96,6 +96,10 @@ sup {
   }
 }
 
+// r3f-scroll-rig styles
+#ScrollRig-canvas {
+  z-index: z-index("canvas");
+}
 .Placeholder {
   display: flex;
   flex-direction: row;
@@ -106,7 +110,6 @@ sup {
   // aspect-ratio: 16/10;
   z-index: z-index("canvas");
 }
-
 .ScrollScene,
 .ViewportScrollScene {
   outline: 1px dashed rgba(255, 255, 255, 0.33);
@@ -123,11 +126,27 @@ sup {
   font-size: 10px;
   padding: 5px;
 }
-
 .ViewportScrollScene:after {
   content: "ViewportScrollScene";
 }
-
-#ScrollRig-canvas {
-  z-index: z-index("canvas");
-}
+// .StickyContainer {
+//   @include dims(auto, calc(100vh - var(--header-height)));
+// }
+// .SomeDomContent {
+//   @include dims(100%);
+//   // position: sticky;
+// }
+// /* Debug styles */
+// .Debug {
+//   outline: 1px dashed rgba(255, 255, 255, 0.33);
+// }
+// .Debug:after {
+//   content: "StickyScrollScene";
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   background: rgba(255, 255, 255, 0.33);
+//   color: black;
+//   font-size: 10px;
+//   padding: 5px;
+// }

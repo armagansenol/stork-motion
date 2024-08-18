@@ -1,13 +1,11 @@
 import { gsap, ScrollTrigger } from "@/lib/gsap"
-import { ScrollSceneChildProps } from "@14islands/r3f-scroll-rig"
+import { useGSAP } from "@gsap/react"
 import { OrthographicCamera, Stats, useGLTF } from "@react-three/drei"
-import { useFrame } from "@react-three/fiber"
 import * as React from "react"
 import * as THREE from "three"
 import { GLTF } from "three-stdlib"
 import { MeshSurfaceSampler } from "three/addons/math/MeshSurfaceSampler.js"
 import { shaderOptions } from "./misc/shaderOptions"
-import { useGSAP } from "@gsap/react"
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,46 +16,36 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function IntroMorph({
-  scale,
-  scrollState,
-}: {
-  scale: ScrollSceneChildProps["scale"]
-  scrollState: ScrollSceneChildProps["scrollState"]
-}) {
-  console.log(scale, scrollState)
-
+export default function IntroMorph() {
   return <Scene />
 }
 
 function Scene() {
   return (
     <>
-      <OrthographicCamera makeDefault position={[0, 0, 10]} near={0.1} zoom={300} />
-
-      <ambientLight intensity={12.2} />
-      <directionalLight castShadow position={[20, 20, 20]} intensity={0.11} />
-      <pointLight position={[20, 0, 20]} intensity={10} />
+      <OrthographicCamera makeDefault position={[0, 0, 100]} near={0.1} zoom={300} />
 
       <React.Suspense fallback={null}>
         <Geometry />
+        {/* <CustomGeometryParticles count={8000} shape="sphere" /> */}
       </React.Suspense>
-      {/* <OrbitControls /> */}
       <Stats />
     </>
   )
 }
 
 function Geometry() {
-  const rotationPower = 0.01
+  // const rotationPower = 0.01
+  const rotateRef = React.useRef<THREE.Group | null>(null)
   const groupRef = React.useRef<THREE.Group | null>(null)
   const meshRef = React.useRef<THREE.Points | null>(null)
+  const fullCircle = Math.PI
 
   const { nodes } = useGLTF("/glb/stork-test.glb") as GLTFResult
 
   useGSAP(() => {
     function getGeometryPosition(geometry: THREE.BufferGeometry) {
-      const numParticles = 100000
+      const numParticles = 50000
       const material = new THREE.MeshBasicMaterial()
       const mesh = new THREE.Mesh(geometry, material)
       const sampler = new MeshSurfaceSampler(mesh).build()
@@ -103,21 +91,30 @@ function Geometry() {
 
     function setScroll() {
       if (!meshRef.current) return
+      if (!rotateRef.current) return
 
       const tl = gsap
         .timeline()
+        // @ts-expect-error: Unreachable code error
         .to(meshRef.current.material.uniforms.u_sec1, {
           value: 1.0,
         })
-        .to(meshRef.current.material.uniforms.u_sec2, {
-          value: 1.0,
-        })
+        .to(
+          rotateRef.current.rotation,
+          {
+            z: 0,
+            y: fullCircle * 0.2,
+            x: 0,
+            duration: 1,
+          },
+          "s"
+        )
 
       ScrollTrigger.create({
         animation: tl,
         trigger: ".pin-wrapper",
-        start: "top top",
-        end: "bottom+=600px bottom",
+        start: "center center",
+        end: "top+=4500px bottom",
         markers: true,
         scrub: true,
         pin: true,
@@ -126,21 +123,11 @@ function Geometry() {
 
     setMesh()
     setScroll()
-
-    console.log(meshRef.current)
   }, [nodes.Tek_Leylek.geometry])
 
-  useFrame(() => {
-    if (!groupRef.current) return
-
-    // groupRef.current.rotation.x += rotationPower
-    // groupRef.current.rotation.y += rotationPower
-    groupRef.current.rotation.z += rotationPower
-  })
-
   return (
-    <>
-      <group ref={groupRef} rotation={new THREE.Euler(Math.PI * 2 * 0.2, 0, Math.PI * 2 * 0.2)}></group>
-    </>
+    <group ref={rotateRef}>
+      <group ref={groupRef} rotation={new THREE.Euler(fullCircle * 0.5, 0, fullCircle * 0.5)}></group>
+    </group>
   )
 }
