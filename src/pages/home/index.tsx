@@ -21,6 +21,7 @@ import Header from "@/components/header"
 import IntroMorph from "@/components/intro-morph"
 import { ModelStork } from "@/components/model-stork"
 import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
+import { JSX } from "react/jsx-runtime"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
@@ -121,7 +122,7 @@ function SpinningBoxSection() {
       <div ref={el} className="SomeDomContent Debug"></div>
       <UseCanvas>
         <StickyScrollScene track={el as MutableRefObject<HTMLElement>}>
-          {(props) => <IntroMorph {...props} />}
+          {(props: JSX.IntrinsicAttributes) => <IntroMorph {...props} />}
         </StickyScrollScene>
       </UseCanvas>
     </div>
