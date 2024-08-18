@@ -18,11 +18,8 @@ import DefaultLayout from "@/layouts/default"
 import { useAll as getAllProjects } from "@/api/queries/projects-home"
 import { useAll as getAllServices } from "@/api/queries/services"
 import Header from "@/components/header"
-import IntroMorph from "@/components/intro-morph"
 import { ModelStork } from "@/components/model-stork"
-// @ts-expect-error: Unreachable code error
-import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
-import { JSX } from "react/jsx-runtime"
+// import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
@@ -55,7 +52,7 @@ export default function Home() {
 
       <section className={cx(s.hero, "pin-wrapper")}>
         <Header />
-        <SpinningBoxSection />
+        {/* <SpinningBoxSection /> */}
       </section>
 
       <section className={cx(s.info, "flex flex-col items-center")}>
@@ -116,19 +113,19 @@ export default function Home() {
   )
 }
 
-function SpinningBoxSection() {
-  const el = useRef<HTMLDivElement>(null)
-  return (
-    <div className="StickyContainer">
-      <div ref={el} className="SomeDomContent Debug"></div>
-      <UseCanvas>
-        <StickyScrollScene track={el as MutableRefObject<HTMLElement>}>
-          {(props: JSX.IntrinsicAttributes) => <IntroMorph {...props} />}
-        </StickyScrollScene>
-      </UseCanvas>
-    </div>
-  )
-}
+// function SpinningBoxSection() {
+//   const el = useRef<HTMLDivElement>(null)
+//   return (
+//     <div className="StickyContainer">
+//       <div ref={el} className="SomeDomContent Debug"></div>
+//       <UseCanvas>
+//         <StickyScrollScene track={el as MutableRefObject<HTMLElement>}>
+//           {(props: JSX.IntrinsicAttributes) => <IntroMorph {...props} />}
+//         </StickyScrollScene>
+//       </UseCanvas>
+//     </div>
+//   )
+// }
 
 function SelectedWorksSection() {
   const el = useRef<HTMLDivElement>(null)
