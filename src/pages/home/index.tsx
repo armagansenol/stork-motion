@@ -20,6 +20,7 @@ import { useAll as getAllServices } from "@/api/queries/services"
 import Header from "@/components/header"
 import IntroMorph from "@/components/intro-morph"
 import { ModelStork } from "@/components/model-stork"
+// @ts-expect-error: Unreachable code error
 import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
 import { JSX } from "react/jsx-runtime"
 

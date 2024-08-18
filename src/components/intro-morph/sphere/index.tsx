@@ -2,6 +2,7 @@ import { useFrame } from "@react-three/fiber"
 import { useMemo, useRef } from "react"
 import * as THREE from "three"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CustomGeometryParticles = (props: any) => {
   const { count, shape } = props
 
