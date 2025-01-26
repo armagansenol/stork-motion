@@ -10,49 +10,27 @@ import * as THREE from "three"
 import { AmbientLight } from "three"
 extend({ AmbientLight, SpotLight, Canvas })
 
+import { useAll as getAllProjects } from "@/api/queries/projects-home"
+import { useAll as getAllServices } from "@/api/queries/services"
 import { CardProject } from "@/components/card-project"
 import Video from "@/components/custom-video"
 import { FormContact } from "@/components/form-contact"
-import DefaultLayout from "@/layouts/default"
-
-import { useAll as getAllProjects } from "@/api/queries/projects-home"
-import { useAll as getAllServices } from "@/api/queries/services"
 import Header from "@/components/header"
+import Hero from "@/components/hero"
 import { ModelStork } from "@/components/model-stork"
-// import { StickyScrollScene } from "@14islands/r3f-scroll-rig/powerups"
+import DefaultLayout from "@/layouts/default"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
   const { data: services } = getAllServices()
 
-  // const selectedWorks = [
-  //   {
-  //     title: "Test 1",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       { ui: "Branding", type: "BRANDING" },
-  //       { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //       { ui: "Motion Design", type: "MOTION_DESIGN" },
-  //     ],
-  //     url: "lol",
-  //   },
-  // ]
-
-  // const categories = [
-  //   {
-  //     title: "BRANDING",
-  //     id: "1",
-  //   },
-  // ]
-
   return (
     <DefaultLayout>
       <Header className="tablet:hidden" />
+      <Header />
 
-      <section className={cx(s.hero, "pin-wrapper")}>
-        <Header />
-        {/* <SpinningBoxSection /> */}
+      <section className={cx(s.hero)}>
+        <Hero />
       </section>
 
       <section className={cx(s.info, "flex flex-col items-center")}>
@@ -112,20 +90,6 @@ export default function Home() {
     </DefaultLayout>
   )
 }
-
-// function SpinningBoxSection() {
-//   const el = useRef<HTMLDivElement>(null)
-//   return (
-//     <div className="StickyContainer">
-//       <div ref={el} className="SomeDomContent Debug"></div>
-//       <UseCanvas>
-//         <StickyScrollScene track={el as MutableRefObject<HTMLElement>}>
-//           {(props: JSX.IntrinsicAttributes) => <IntroMorph {...props} />}
-//         </StickyScrollScene>
-//       </UseCanvas>
-//     </div>
-//   )
-// }
 
 function SelectedWorksSection() {
   const el = useRef<HTMLDivElement>(null)

@@ -1,7 +1,7 @@
 .hero {
   // @include dims(auto, calc(100vh - var(--header-height)));
   @include dims(100vw, 100vh);
-  overflow: hidden;
+  margin-top: calc(var(--header-height) * -1);
 
   @include mobile {
     display: none;
