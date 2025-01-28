@@ -26,7 +26,6 @@ export default function Home() {
 
   return (
     <DefaultLayout>
-      <Header className="tablet:hidden" />
       <Header />
       <section className={cx(s.hero)}>
         <BasicScrollScene />
