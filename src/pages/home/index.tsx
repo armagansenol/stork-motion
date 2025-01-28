@@ -1,6 +1,6 @@
 import s from "./home.module.scss"
 
-import { ScrollScene, ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
+import { ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
 import { Environment, PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber"
 import cx from "clsx"
@@ -156,13 +156,9 @@ function BasicScrollScene() {
     <>
       <div ref={el} className="Placeholder ScrollScene"></div>
       <UseCanvas>
-        <ScrollScene track={el as MutableRefObject<HTMLElement>}>
-          {(props) => (
-            <mesh {...props}>
-              <Hero />
-            </mesh>
-          )}
-        </ScrollScene>
+        <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
+          {(props) => <Hero {...props} />}
+        </ViewportScrollScene>
       </UseCanvas>
     </>
   )

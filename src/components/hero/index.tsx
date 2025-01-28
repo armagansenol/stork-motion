@@ -5,6 +5,7 @@ import * as THREE from "three"
 
 import fragmentShader from "@/assets/shaders/default/fragmentShader.glsl"
 import vertexShader from "@/assets/shaders/default/vertexShader.glsl"
+import { ScrollSceneChildProps } from "@14islands/r3f-scroll-rig"
 import SimulationMaterial from "./SimulationMaterial"
 
 extend({ SimulationMaterial })
@@ -69,7 +70,7 @@ const FBOParticles = () => {
     points.current.rotation.y = clock.elapsedTime * 0.1
     points.current.rotation.x = Math.sin(clock.elapsedTime * 0.2) * 0.1
 
-    simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime * 0.05
+    simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime * 0.5
   })
 
   return (
@@ -105,9 +106,22 @@ const FBOParticles = () => {
   )
 }
 
-const Scene = () => {
+const Scene = ({
+  scale,
+  scrollState,
+}: {
+  scale: ScrollSceneChildProps["scale"]
+  scrollState: ScrollSceneChildProps["scrollState"]
+}) => {
+  const mesh = useRef<THREE.Group>(null)
+
+  useFrame(() => {
+    if (!mesh.current) return
+    mesh.current.rotation.y = scrollState.progress * Math.PI * 2
+  })
+
   return (
-    <group scale={[0.22, 0.4, 0.4]}>
+    <group ref={mesh} scale={scale.xy.min() * 0.4}>
       <ambientLight intensity={0.5} />
       <FBOParticles />
     </group>
