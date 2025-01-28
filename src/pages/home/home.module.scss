@@ -2,6 +2,7 @@
   // @include dims(auto, calc(100vh - var(--header-height)));
   @include dims(100vw, 100vh);
   margin-top: calc(var(--header-height) * -1);
+  max-height: desktop-vw(700px);
 
   @include mobile {
     display: none;
