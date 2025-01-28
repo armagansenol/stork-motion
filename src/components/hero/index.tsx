@@ -1,5 +1,5 @@
 import { useFBO } from "@react-three/drei"
-import { Canvas, createPortal, extend, useFrame } from "@react-three/fiber"
+import { createPortal, extend, useFrame } from "@react-three/fiber"
 import { useMemo, useRef } from "react"
 import * as THREE from "three"
 
@@ -66,6 +66,8 @@ const FBOParticles = () => {
     gl.setRenderTarget(null)
 
     points.current.material.uniforms.uPositions.value = renderTarget.texture
+    points.current.rotation.y = clock.elapsedTime * 0.1
+    points.current.rotation.x = Math.sin(clock.elapsedTime * 0.2) * 0.1
 
     simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime * 0.05
   })
@@ -105,10 +107,10 @@ const FBOParticles = () => {
 
 const Scene = () => {
   return (
-    <Canvas style={{ height: "100%", width: "100%" }} camera={{ position: [0.75, 0.75, 1.5] }}>
+    <group scale={[0.22, 0.4, 0.4]}>
       <ambientLight intensity={0.5} />
       <FBOParticles />
-    </Canvas>
+    </group>
   )
 }
 

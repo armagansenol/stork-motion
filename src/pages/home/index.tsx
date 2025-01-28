@@ -1,6 +1,6 @@
 import s from "./home.module.scss"
 
-import { ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
+import { ScrollScene, ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14islands/r3f-scroll-rig"
 import { Environment, PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber"
 import cx from "clsx"
@@ -28,18 +28,15 @@ export default function Home() {
     <DefaultLayout>
       <Header className="tablet:hidden" />
       <Header />
-
       <section className={cx(s.hero)}>
-        <Hero />
+        <BasicScrollScene />
       </section>
-
       <section className={cx(s.info, "flex flex-col items-center")}>
         <p>
           We are Stork Motion, a design studio dedicated to crafting extraordinary experiences through innovation and
           creativity.
         </p>
       </section>
-
       <section
         className={cx(s.whatWeDo, "grid grid-rows-[auto_auto] grid-cols-12 tablet:grid-rows-1 gap-0 tablet:gap-20")}
       >
@@ -62,7 +59,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <section className={cx(s.selectedWorks, "flex flex-col items-stretch")}>
         <h2 className="tablet:hidden">SELECTED WORKS</h2>
         <div className={cx(s.selectedWorksTitleC, "hidden tablet:block")}>
@@ -83,7 +79,6 @@ export default function Home() {
           MORE WORKS
         </Link>
       </section>
-
       <section className={s.contactForm}>
         <FormContact />
       </section>
@@ -116,7 +111,6 @@ function SelectedWorksWebGL({
 
   useFrame(() => {
     if (!mesh.current) return
-
     mesh.current.rotation.y = scrollState.progress * Math.PI * 2
   })
 
@@ -126,20 +120,6 @@ function SelectedWorksWebGL({
         <group ref={mesh} scale={0.00007} position={[0, 0, 0]} onPointerEnter={() => console.log("lol")}>
           <ModelStork
             material={
-              // new THREE.MeshPhysicalMaterial({
-              //   transparent: true,
-              //   opacity: 0.25,
-              //   transmission: 1,
-              //   roughness: 0.05,
-              //   metalness: 0,
-              //   reflectivity: 1,
-              //   ior: 1.45,
-              //   clearcoat: 0.8,
-              //   clearcoatRoughness: 0,
-              //   color: 0xffffff,
-              //   thickness: 0.5,
-              //   envMapIntensity: 2,
-              // })
               new THREE.MeshPhysicalMaterial({
                 metalness: 1,
                 roughness: 0.2,
@@ -152,12 +132,10 @@ function SelectedWorksWebGL({
             }
           />
         </group>
-
         <group scale={0.02} position={[0, 0, 0]}>
           <CanvasText />
         </group>
       </group>
-
       <PerspectiveCamera
         position={[0, 0, 20]}
         makeDefault
@@ -165,12 +143,27 @@ function SelectedWorksWebGL({
           self.lookAt(0, 0, 0)
         }}
       />
-
       <ambientLight intensity={1} />
-
       <Environment preset="studio" />
-
       <Rig />
+    </>
+  )
+}
+
+function BasicScrollScene() {
+  const el = useRef<HTMLDivElement>(null)
+  return (
+    <>
+      <div ref={el} className="Placeholder ScrollScene"></div>
+      <UseCanvas>
+        <ScrollScene track={el as MutableRefObject<HTMLElement>}>
+          {(props) => (
+            <mesh {...props}>
+              <Hero />
+            </mesh>
+          )}
+        </ScrollScene>
+      </UseCanvas>
     </>
   )
 }

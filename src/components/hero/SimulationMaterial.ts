@@ -2,29 +2,42 @@ import simulationVertexShader from "@/assets/shaders/simulation/vertexShader.gls
 import simulationFragmentShader from "@/assets/shaders/simulation/fragmentShader.glsl"
 import * as THREE from "three"
 
+interface SimulationUniforms {
+  [uniform: string]: THREE.IUniform<THREE.DataTexture | number>
+  positions: { value: THREE.DataTexture }
+  uFrequency: { value: number }
+  uTime: { value: number }
+}
+
 const getRandomData = (width: number, height: number) => {
-  // we need to create a vec4 since we're passing the positions to the fragment shader
-  // data textures need to have 4 components, R, G, B, and A
-  const length = width * height * 4
-  const data = new Float32Array(length)
+  const length = width * height
+  const data = new Float32Array(length * 4)
+
+  // Pre-calculate constants
+  const TWO_PI = Math.PI * 2
 
   for (let i = 0; i < length; i++) {
     const stride = i * 4
 
-    const distance = Math.sqrt(Math.random()) * 2.0
-    const theta = THREE.MathUtils.randFloatSpread(360)
-    const phi = THREE.MathUtils.randFloatSpread(360)
+    // Using more efficient random distribution
+    const r = Math.sqrt(Math.random()) * 2.0
+    const theta = Math.random() * TWO_PI
+    const phi = Math.acos(2 * Math.random() - 1)
 
-    data[stride] = distance * Math.sin(theta) * Math.cos(phi)
-    data[stride + 1] = distance * Math.sin(theta) * Math.sin(phi)
-    data[stride + 2] = distance * Math.cos(theta)
-    data[stride + 3] = 1.0 // this value will not have any impact
+    // More efficient spherical coordinate calculation
+    const sinPhi = Math.sin(phi)
+    data[stride] = r * sinPhi * Math.cos(theta)
+    data[stride + 1] = r * sinPhi * Math.sin(theta)
+    data[stride + 2] = r * Math.cos(phi)
+    data[stride + 3] = 1.0
   }
 
   return data
 }
 
 class SimulationMaterial extends THREE.ShaderMaterial {
+  private positionsTexture: THREE.DataTexture
+
   constructor(size: number) {
     const positionsTexture = new THREE.DataTexture(
       getRandomData(size, size),
@@ -35,7 +48,7 @@ class SimulationMaterial extends THREE.ShaderMaterial {
     )
     positionsTexture.needsUpdate = true
 
-    const simulationUniforms = {
+    const simulationUniforms: SimulationUniforms = {
       positions: { value: positionsTexture },
       uFrequency: { value: 0.25 },
       uTime: { value: 0 },
@@ -46,6 +59,13 @@ class SimulationMaterial extends THREE.ShaderMaterial {
       vertexShader: simulationVertexShader,
       fragmentShader: simulationFragmentShader,
     })
+
+    this.positionsTexture = positionsTexture
+  }
+
+  dispose(): void {
+    this.positionsTexture.dispose()
+    super.dispose()
   }
 }
 
