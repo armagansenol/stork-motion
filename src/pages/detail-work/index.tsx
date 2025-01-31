@@ -17,7 +17,7 @@ export default function DetailWork() {
   const navigate = useNavigate()
   const { isLoading, data } = useSingle(params.projectName ?? "")
 
-  const baseUrl = "https://cms.luckluckstudio.com/assets/images/projects"
+  const baseUrl = `https://cms.storkmotion.com/assets/images/projects/${params.projectName}/`
 
   console.log(params, data, isLoading)
 
@@ -140,7 +140,7 @@ export default function DetailWork() {
                       <div className={cx(s.block, "flex-1")} key={i}>
                         <div className={s.mediaC}>
                           {item.type === "image" ? (
-                            <Img src={`${baseUrl}/${data.folderName}/${item.desktop}` as string} />
+                            <Img src={`${baseUrl}/${item.desktop}` as string} />
                           ) : (
                             <Video src={`${item.desktop}#t=0.01` as string} autoPlay={item.autoplay as boolean} />
                           )}
