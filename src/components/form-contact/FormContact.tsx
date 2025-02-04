@@ -43,7 +43,7 @@ export default function FormContact() {
         <p>
           You can also send us an email at
           <strong>
-            <a href="mailto:hello@luckluck.com"> hello@luckluck.com </a>
+            <a href="mailto:hello@storkmotion.com"> hello@storkmotion.com </a>
           </strong>
           if you prefer.
         </p>
