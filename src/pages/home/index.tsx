@@ -69,7 +69,7 @@ export default function Home() {
             projects.map((item, i) => {
               return (
                 <div className={s.cardC} key={i}>
-                  <CardProject {...item} mediaClassName={s.homeMediaC} />
+                  <CardProject {...item} mediaClassName={s.homeMediaC} titleSize="lg" />
                 </div>
               )
             })}
@@ -153,8 +153,8 @@ function BasicScrollScene() {
   const el = useRef<HTMLDivElement>(null)
   return (
     <>
-      <div ref={el} className="Placeholder ScrollScene"></div>
-      <UseCanvas>
+      <div ref={el} className="Placeholder ScrollScene pointer-events-none"></div>
+      <UseCanvas style={{ pointerEvents: "none" }}>
         <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
           {(props) => <Hero {...props} />}
         </ViewportScrollScene>

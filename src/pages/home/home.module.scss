@@ -1,20 +1,32 @@
 .hero {
   // @include dims(auto, calc(100vh - var(--header-height)));
-  @include dims(100vw, 100vh);
+  @include dims(100vw, 200vh);
   margin-top: calc(var(--header-height) * -1);
   max-height: desktop-vw(900px);
 
+  @include tablet {
+    @include dims(100vw, 200vh);
+  }
+
   @include mobile {
-    max-height: mobile-vw(360px);
+    @include dims(100vw, auto);
+    margin-top: mobile-vw(0px);
+    max-height: auto;
   }
 }
 
 .info {
   margin-bottom: desktop-vw(100px);
   padding: desktop-vw(50px) 0;
+  margin-top: -25vh;
+
+  @include tablet {
+    margin-top: -10vh;
+  }
 
   @include mobile {
     margin-bottom: unset;
+    margin-top: 0;
     padding: mobile-vw(30px) mobile-vw(16px) mobile-vw(50px) mobile-vw(16px);
   }
 
@@ -42,9 +54,9 @@
   }
 
   .text {
-    @include mobile {
-      margin-bottom: mobile-vw(64px);
-    }
+    // @include mobile {
+    //   margin-bottom: mobile-vw(64px);
+    // }
 
     > h2 {
       color: var(--plastic-carrot);
@@ -67,7 +79,7 @@
         font-family: var(--font-manrope);
         font-size: desktop-vw(24px);
         font-weight: 300;
-        padding: desktop-vw(8px) 0;
+        padding: desktop-vw(12px) 0;
 
         @include mobile {
           font-size: mobile-vw(20px);
@@ -80,9 +92,11 @@
 
   .videoC {
     @include dims(auto, desktop-vw(400px));
+    opacity: 0;
 
     @include mobile {
       @include dims(auto, mobile-vw(250px));
+      display: none;
     }
   }
 }
@@ -92,7 +106,7 @@
   // padding: desktop-vw(140px) desktop-vw(160px);
 
   @include mobile {
-    padding: mobile-vw(50px) mobile-vw(16px);
+    padding: mobile-vw(30px) mobile-vw(16px);
   }
 
   .selectedWorksTitleC {
@@ -127,10 +141,10 @@
 
   .items {
     margin-top: desktop-vw(80px);
-    padding: desktop-vw(80px) desktop-vw(160px);
+    padding: desktop-vw(80px) desktop-vw(260px);
 
     @include mobile {
-      margin-top: mobile-vw(100px);
+      margin-top: mobile-vw(50px);
       padding: 0;
     }
 
@@ -138,7 +152,7 @@
       margin-bottom: desktop-vw(100px);
 
       @include mobile {
-        margin-bottom: mobile-vw(50px);
+        margin-bottom: mobile-vw(30px);
       }
 
       &:last-child {

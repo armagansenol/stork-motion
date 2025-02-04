@@ -5,7 +5,8 @@ import cx from "clsx"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { FormSchema, useSubmitForm } from "@/api/mutations/contact-form"
+import { useSubmitForm } from "@/api/mutations/contact-form"
+import { FormSchema } from "@/api/mutations/contact-form/schema"
 import SilverStork from "@/components/silver-stork"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/utility/form"
 import { Input } from "@/components/utility/input"
@@ -22,17 +23,17 @@ export default function FormContact() {
     },
   })
 
-  const { mutate, isLoading, isError, isSuccess } = useSubmitForm()
-
-  console.table([
-    ["isLoading", isLoading],
-    ["isError", isError],
-    ["isSuccess", isSuccess],
-  ])
+  const { mutate } = useSubmitForm()
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("form submitted", data)
-    mutate(data)
+    mutate(data, {
+      onSuccess: (response) => {
+        if (response.success) {
+          alert(response.message)
+          form.reset()
+        }
+      },
+    })
   }
 
   return (
@@ -72,7 +73,6 @@ export default function FormContact() {
                   )}
                 />
               </div>
-
               <div
                 className={cx(s.fieldC, {
                   [s.error]: form.formState.errors.email,
@@ -91,7 +91,6 @@ export default function FormContact() {
                   )}
                 />
               </div>
-
               <div
                 className={cx(s.fieldC, {
                   [s.error]: form.formState.errors.message,
@@ -114,7 +113,6 @@ export default function FormContact() {
                   )}
                 />
               </div>
-
               <button className={cx(s.submitBtn)} type="submit" disabled={!form.formState.isValid}>
                 <span>Send now</span>
               </button>

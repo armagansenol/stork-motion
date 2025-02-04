@@ -18,7 +18,17 @@ export const FormSchema = z.object({
 type FormData = z.infer<typeof FormSchema>
 
 async function submitForm(data: FormData) {
-  const response = await apiClient.post("/message.php", data)
+  const formData = new FormData()
+  formData.append("name", data.name)
+  formData.append("email", data.email)
+  formData.append("message", data.message)
+  formData.append("kvkk", data.kvkk.toString())
+
+  const response = await apiClient.post("/message.php", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
   return response.data
 }
 

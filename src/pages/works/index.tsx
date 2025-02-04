@@ -147,6 +147,11 @@ export default function Works() {
             )
           })}
       </section>
+      {projects?.length === 0 && (
+        <div className="flex items-center justify-center h-[500px]">
+          <h1 className="text-2xl font-bold">No projects found</h1>
+        </div>
+      )}
     </DefaultLayout>
   )
 }

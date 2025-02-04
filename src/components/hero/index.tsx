@@ -121,7 +121,7 @@ const Scene = ({
   })
 
   return (
-    <group ref={mesh} scale={scale.xy.min() * 0.4}>
+    <group ref={mesh} scale={scale.xy.min() * 0.3} position-y={scale.xy.min() * 0.1}>
       <ambientLight intensity={0.5} />
       <FBOParticles />
     </group>
