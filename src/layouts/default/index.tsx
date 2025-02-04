@@ -1,6 +1,7 @@
 import { Footer } from "@/components/footer"
 import { useScrollbar } from "@14islands/r3f-scroll-rig"
 import { ReactNode, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
 type Props = {
   children: ReactNode
@@ -8,10 +9,11 @@ type Props = {
 
 const DefaultLayout = ({ children }: Props) => {
   const scrollbar = useScrollbar()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    scrollbar.scrollTo(0)
-  }, [])
+    scrollbar?.scrollTo({ top: 0, immediate: true })
+  }, [pathname])
 
   return (
     <>
