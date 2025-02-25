@@ -36,6 +36,33 @@ export default function Home() {
           creativity.
         </p>
       </section>
+      <section className="w-full h-screen relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-slate-300"
+          style={{
+            position: "relative",
+            paddingBottom: "56.25%" /* 16:9 Aspect Ratio */,
+            height: 0,
+            overflow: "hidden",
+          }}
+        >
+          <iframe
+            src="https://player.vimeo.com/video/1058139461?background=1&badge=0&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;player_id=0&amp;app_id=58479"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: "100%",
+              height: "100%",
+              transform: "translate(-50%, -50%)",
+              objectFit: "cover",
+              minWidth: "100%",
+              minHeight: "100%",
+            }}
+          ></iframe>
+        </div>
+      </section>
       <section
         className={cx(s.whatWeDo, "grid grid-rows-[auto_auto] grid-cols-12 tablet:grid-rows-1 gap-0 tablet:gap-20")}
       >
