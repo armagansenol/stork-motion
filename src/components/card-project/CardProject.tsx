@@ -3,9 +3,9 @@ import s from "./card-project.module.scss"
 import cx from "clsx"
 import { Link } from "react-router-dom"
 
-import Img from "@/components/custom-img"
-import Video from "@/components/custom-video"
 import { MediaType, ProjectCardProps } from "@/lib/types"
+import { IframeVideo } from "../iframe-video"
+import Img from "../custom-img"
 
 export interface Props extends ProjectCardProps {
   mediaClassName: string
@@ -22,7 +22,7 @@ export default function CardProject(props: Props) {
         {props.mediaType === MediaType.image ? (
           <Img objectFit="cover" src={props.mediaSrc} />
         ) : (
-          <Video src={props.mediaSrc} />
+          <IframeVideo src={props.mediaSrc} />
         )}
       </div>
       <p className={cx(s.title, props.titleSize && [s[props.titleSize]])}>{props.projectName}</p>

@@ -1,21 +1,26 @@
 import s from "./detail-work.module.scss"
 
 import cx from "clsx"
+import { useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { useScrollbar } from "@14islands/r3f-scroll-rig"
 
 import { useSingle } from "@/api/queries/projects"
-import Video from "@/components/custom-video"
-import { FormContact } from "@/components/form-contact"
-import Marquee from "@/components/marquee"
 import Img from "@/components/custom-img"
-import DefaultLayout from "@/layouts/default"
-import { useEffect } from "react"
+import { FormContact } from "@/components/form-contact"
 import Header from "@/components/header"
+import { IframeVideo } from "@/components/iframe-video"
+import Marquee from "@/components/marquee"
+import DefaultLayout from "@/layouts/default"
+import { MediaType } from "@/lib/types"
 
 export default function DetailWork() {
   const params = useParams()
   const navigate = useNavigate()
   const { isLoading, data } = useSingle(params.projectName ?? "")
+  const scrollbar = useScrollbar()
+
+  console.log("data", data)
 
   const baseUrl = `https://cms.storkmotion.com/assets/images/projects/${params.projectName}/`
 
@@ -27,11 +32,9 @@ export default function DetailWork() {
     }
   }, [data, isLoading, navigate])
 
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     ScrollTrigger.refresh()
-  //   }
-  // }, [isLoading])
+  useEffect(() => {
+    scrollbar?.__lenis?.scrollTo(0, { immediate: true })
+  }, [])
 
   return (
     <DefaultLayout>
@@ -52,7 +55,11 @@ export default function DetailWork() {
             </div>
           </div>
           <div className={s.mediaC}>
-            <Img src={data?.coverMedia.desktop as string} />
+            {data?.coverMedia.type === MediaType.image ? (
+              <Img objectFit="cover" src={data?.coverMedia.desktop as string} />
+            ) : (
+              <IframeVideo src={data?.coverMedia.desktop as string} />
+            )}
           </div>
           <p className={s.description}>{data?.description}</p>
         </div>
@@ -68,7 +75,7 @@ export default function DetailWork() {
                           {item.type === "image" ? (
                             <Img src={`${baseUrl}/${item.desktop}` as string} />
                           ) : (
-                            <Video src={`${item.desktop}#t=0.01` as string} autoPlay={item.autoplay as boolean} />
+                            <IframeVideo src={`${"https://vimeo.com/1061704780?share=copy"}#t=0.01` as string} />
                           )}
                         </div>
                       </div>

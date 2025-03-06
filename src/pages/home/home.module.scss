@@ -160,11 +160,11 @@
       }
 
       .homeMediaC {
-        @include dims(100%, desktop-vw(600px));
+        // @include dims(100%, desktop-vw(600px));
         border: 1px solid var(--black);
 
         @include mobile {
-          @include dims(100%, mobile-vw(200px));
+          // @include dims(100%, mobile-vw(200px));
         }
       }
     }

@@ -12,74 +12,8 @@ import Header from "@/components/header"
 
 export default function Works() {
   const [currentServices, setCurrentServices] = useState<string[]>([])
-
   const { data: projects, isLoading: projectsLoading } = getAllProjects(currentServices.join(","))
   const { data: services, isLoading: servicesLoading } = getAllServices()
-
-  // const filters = [
-  //   { ui: "Branding", type: "BRANDING" },
-  //   { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //   { ui: "Motion Design", type: "MOTION_DESIGN" },
-  // ]
-
-  // const mockProjects = [
-  //   {
-  //     title: "Test 1",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       {
-  //         ui: "Branding",
-  //         type: "BRANDING",
-  //       },
-  //     ],
-  //     url: "lol",
-  //   },
-  //   {
-  //     title: "Test 2",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       { ui: "Branding", type: "BRANDING" },
-  //       { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //       { ui: "Motion Design", type: "MOTION_DESIGN" },
-  //     ],
-  //     url: "lol",
-  //   },
-  //   {
-  //     title: "Test 2",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       { ui: "Branding", type: "BRANDING" },
-  //       { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //       { ui: "Motion Design", type: "MOTION_DESIGN" },
-  //     ],
-  //     url: "lol",
-  //   },
-  //   {
-  //     title: "Test 2",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       { ui: "Branding", type: "BRANDING" },
-  //       { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //       { ui: "Motion Design", type: "MOTION_DESIGN" },
-  //     ],
-  //     url: "lol",
-  //   },
-  //   {
-  //     title: "Test 2",
-  //     mediaType: MediaType.image,
-  //     mediaSrc: "/img/sample.jpg",
-  //     categories: [
-  //       { ui: "Branding", type: "BRANDING" },
-  //       { ui: "Web Design & Development", type: "WEB_DESIGN_AND_DEVELOPMENT" },
-  //       { ui: "Motion Design", type: "MOTION_DESIGN" },
-  //     ],
-  //     url: "lol",
-  //   },
-  // ]
 
   function handleCurrentServices(selectedService: string) {
     if (selectedService === "ALL") {

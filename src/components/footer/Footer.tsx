@@ -19,9 +19,6 @@ export default function Footer() {
         <Link to="/" className={s.iconC}>
           <IconLinkedin fill="var(--black)" />
         </Link>
-        <Link to="/" className={s.iconC}>
-          <IconLinkedin fill="var(--black)" />
-        </Link>
       </div>
 
       <small>

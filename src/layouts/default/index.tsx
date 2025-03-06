@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }: Props) => {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    scrollbar?.scrollTo({ top: 0, immediate: true })
+    scrollbar?.__lenis?.scrollTo(0, { immediate: true })
   }, [pathname])
 
   return (

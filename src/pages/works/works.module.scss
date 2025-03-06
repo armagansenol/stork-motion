@@ -90,11 +90,11 @@
   }
 
   .worksMediaC {
-    @include dims(auto, desktop-vw(400px));
+    // @include dims(auto, desktop-vw(400px));
     border: 1px solid var(--black);
 
     @include mobile {
-      @include dims(auto, mobile-vw(220px));
+      // @include dims(auto, mobile-vw(220px));
     }
   }
 }
