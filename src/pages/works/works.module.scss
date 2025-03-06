@@ -52,7 +52,7 @@
 
       @include mobile {
         border-radius: mobile-vw(16px);
-        font-size: mobile-vw(14px);
+        font-size: mobile-vw(11px);
         padding: mobile-vw(6px) mobile-vw(14px);
       }
 
@@ -92,6 +92,7 @@
   .worksMediaC {
     // @include dims(auto, desktop-vw(400px));
     border: 1px solid var(--black);
+    aspect-ratio: 2 / 1;
 
     @include mobile {
       // @include dims(auto, mobile-vw(220px));

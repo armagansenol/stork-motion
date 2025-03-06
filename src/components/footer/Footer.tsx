@@ -1,9 +1,6 @@
 import s from "./footer.module.scss"
 
 import cx from "clsx"
-import { Link } from "react-router-dom"
-
-import { IconLinkedin } from "@/components/icons"
 
 export default function Footer() {
   return (
@@ -13,13 +10,13 @@ export default function Footer() {
         "flex flex-col tablet:flex-row items-center tablet:items-end justify-between gap-5 tablet:gap-0"
       )}
     >
-      <small>© Stork Motion 2024</small>
+      <small>© Stork Motion 2025</small>
 
-      <div className={cx(s.social, "flex items-center justify-center gap-5")}>
+      {/* <div className={cx(s.social, "flex items-center justify-center gap-5")}>
         <Link to="/" className={s.iconC}>
           <IconLinkedin fill="var(--black)" />
         </Link>
-      </div>
+      </div> */}
 
       <small>
         Web Solutions Partner{" "}

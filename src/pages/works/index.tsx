@@ -35,7 +35,6 @@ export default function Works() {
   return (
     <DefaultLayout>
       <Header />
-
       <section className={cx(s.intro, "flex flex-col tablet:flex-row items-center justify-between")}>
         <h1>WORKS</h1>
         <div

@@ -58,12 +58,11 @@
     }
 
     .mediaC {
-      @include dims(auto, desktop-vw(750px));
       border-radius: desktop-vw(20px);
       overflow: hidden;
+      position: relative;
 
       @include mobile {
-        @include dims(auto, mobile-vw(250px));
         border-radius: mobile-vw(10px);
       }
     }
@@ -79,8 +78,8 @@
 
       @include mobile {
         @include dims(auto);
-        font-size: mobile-vw(18px);
-        line-height: 1.5;
+        font-size: mobile-vw(16px);
+        line-height: 1.75;
         margin: mobile-vw(30px) 0;
         text-align: center;
       }

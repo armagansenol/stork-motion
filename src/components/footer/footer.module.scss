@@ -1,6 +1,6 @@
 .footer {
   @include dims(auto, desktop-vw(180px));
-  padding: desktop-vw(20px) desktop-vw(40px);
+  padding: desktop-vw(40px) desktop-vw(40px);
   position: relative;
 
   @include mobile {
