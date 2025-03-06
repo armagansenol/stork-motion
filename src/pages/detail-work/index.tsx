@@ -75,7 +75,7 @@ export default function DetailWork() {
                           {item.type === "image" ? (
                             <Img src={`${baseUrl}/${item.desktop}` as string} />
                           ) : (
-                            <IframeVideo src={`${"https://vimeo.com/1061704780?share=copy"}#t=0.01` as string} />
+                            <IframeVideo src={item.desktop as string} />
                           )}
                         </div>
                       </div>
