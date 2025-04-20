@@ -4,7 +4,7 @@ import { ScrollSceneChildProps, UseCanvas, ViewportScrollScene } from "@14island
 import { Environment, PerspectiveCamera, SpotLight, Text } from "@react-three/drei"
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber"
 import cx from "clsx"
-import { MutableRefObject, useRef } from "react"
+import { MutableRefObject, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import * as THREE from "three"
 import { AmbientLight } from "three"
@@ -13,33 +13,43 @@ extend({ AmbientLight, SpotLight, Canvas })
 import { useAll as getAllProjects } from "@/api/queries/projects-home"
 import { useAll as getAllServices } from "@/api/queries/services"
 import { CardProject } from "@/components/card-project"
-import Video from "@/components/custom-video"
 import { FormContact } from "@/components/form-contact"
 import Header from "@/components/header"
-import Hero from "@/components/hero"
+import { IframeVideo } from "@/components/iframe-video"
 import { ModelStork } from "@/components/model-stork"
 import DefaultLayout from "@/layouts/default"
+import VideoModal from "@/components/video-modal"
 
 export default function Home() {
   const { data: projects } = getAllProjects()
   const { data: services } = getAllServices()
 
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <DefaultLayout>
       <Header />
-      <section className={cx(s.hero)}>
-        <BasicScrollScene />
+      <section className={cx("grid grid-cols-12 px-4 lg:px-10 xl:px-20 pt-4 lg:pt-10 pb-12 lg:pb-32 items-center")}>
+        <div className="col-span-12 lg:col-span-6 pr-0 lg:pr-10 xl:pr-12 2xl:pr-40 order-2 lg:order-1 pt-8 lg:pt-0">
+          <p className="font-manrope text-2xl lg:text-2xl xl:text-4xl font-thin leading-snug lg:leading-loose xl:leading-normal text-center lg:text-left">
+            We are Stork Motion, a design studio dedicated to crafting extraordinary experiences through innovation and
+            creativity.
+          </p>
+        </div>
+        <div className="col-span-12 lg:col-span-6 xl:pl-24 order-1 lg:order-2">
+          <div
+            className={cx(s.videoC, "w-full aspect-square rounded-2xl lg:rounded-3xl overflow-hidden cursor-pointer")}
+            onClick={() => setIsOpen(true)}
+          >
+            <IframeVideo
+              aspectRatio="100%"
+              src="https://player.vimeo.com/video/1076773063?background=1&badge=0&autoplay=1&muted=1&loop=1&player_id=0&app_id=58479"
+            />
+          </div>
+        </div>
       </section>
-      <section className={cx(s.info, "flex flex-col items-center")}>
-        <p>
-          We are Stork Motion, a design studio dedicated to crafting extraordinary experiences through innovation and
-          creativity.
-        </p>
-      </section>
-      <section
-        className={cx(s.whatWeDo, "grid grid-rows-[auto_auto] grid-cols-12 tablet:grid-rows-1 gap-0 tablet:gap-20")}
-      >
-        <div className={cx(s.text, "col-span-12 tablet:col-span-5")}>
+      <section className={cx(s.whatWeDo, "flex flex-col items-center")}>
+        <div className={cx(s.text, "text-center flex flex-col items-center")}>
           <h2>WHAT WE DO</h2>
           <ul>
             {services &&
@@ -51,11 +61,6 @@ export default function Home() {
                 )
               })}
           </ul>
-        </div>
-        <div className="col-span-12 tablet:col-span-7">
-          <div className={s.videoC}>
-            <Video src="/video/sample.mp4" />
-          </div>
         </div>
       </section>
       <section className={cx(s.selectedWorks, "flex flex-col items-stretch")}>
@@ -81,6 +86,7 @@ export default function Home() {
       <section className={s.contactForm}>
         <FormContact />
       </section>
+      <VideoModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </DefaultLayout>
   )
 }
@@ -149,19 +155,19 @@ function SelectedWorksWebGL({
   )
 }
 
-function BasicScrollScene() {
-  const el = useRef<HTMLDivElement>(null)
-  return (
-    <>
-      <div ref={el} className="Placeholder ScrollScene pointer-events-none"></div>
-      <UseCanvas style={{ pointerEvents: "none" }}>
-        <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
-          {(props) => <Hero {...props} />}
-        </ViewportScrollScene>
-      </UseCanvas>
-    </>
-  )
-}
+// function BasicScrollScene() {
+//   const el = useRef<HTMLDivElement>(null)
+//   return (
+//     <>
+//       <div ref={el} className="Placeholder ScrollScene pointer-events-none"></div>
+//       <UseCanvas style={{ pointerEvents: "none" }}>
+//         <ViewportScrollScene track={el as MutableRefObject<HTMLElement>}>
+//           {(props) => <Hero {...props} />}
+//         </ViewportScrollScene>
+//       </UseCanvas>
+//     </>
+//   )
+// }
 
 function CanvasText() {
   const { viewport } = useThree()

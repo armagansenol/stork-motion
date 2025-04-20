@@ -1,20 +1,21 @@
 export interface IframeVideoProps {
+  aspectRatio?: string
   src: string
 }
 
-export function IframeVideo(props: IframeVideoProps) {
+export function IframeVideo({ aspectRatio = "50%", src }: IframeVideoProps) {
   return (
     <div
       className="absolute inset-0 bg-slate-300 pointer-events-none"
       style={{
         position: "relative",
-        paddingBottom: "50%" /* 2:1 Aspect Ratio */,
+        paddingBottom: aspectRatio,
         height: 0,
         overflow: "hidden",
       }}
     >
       <iframe
-        src={props.src}
+        src={src}
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
         style={{
           position: "absolute",

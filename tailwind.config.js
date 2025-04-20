@@ -12,6 +12,9 @@ export default {
         desktop: `${breakpoints.tablet}px`,
         // => @media (min-width: 1024px) { ... }
       },
+      fontFamily: {
+        manrope: "var(--font-manrope)",
+      },
     },
   },
   plugins: [],
